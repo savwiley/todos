@@ -1,0 +1,25 @@
+:root {
+    --light: #FFCDB2;
+    --lighter: #FFB4A2;
+    --medium: #E5989B;
+    --darker: #B5838D;
+    --dark: #6D6875;
+}
+
+* {
+    margin: 0;
+    background: var(--medium);
+}
+
+.card {
+    padding: 5px;
+    width: 50%;
+    min-height: 20%;
+    margin: 0 auto 20px;
+    background: var(--light);
+}
+
+#help {
+    background: green;
+    color: green;
+}
