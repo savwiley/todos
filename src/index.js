@@ -1,9 +1,11 @@
-import init from "./modules/init"
+import {toDos} from "./modules/init";
+import doms from "./modules/doms";
 
 
 
 const run = (() => {
-    init();
+    toDos;
+    doms();
 })();
 
 
