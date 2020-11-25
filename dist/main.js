@@ -1,1 +1,1 @@
-console.log("working!");
+(()=>{"use strict";var t;t=new function(t,i,s,e,h){this.title=t,this.desc=i,this.dueDate=s,this.priorty=e,this.notes=h,[].push(t,i,s,e,h)}("Hi","Yo","12","high","yep"),console.log(t)})();

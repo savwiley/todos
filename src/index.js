@@ -1,5 +1,9 @@
+import init from "./modules/init"
+
+
+
 const run = (() => {
-    return console.log("working!")
+    init();
 })();
 
 
@@ -9,7 +13,7 @@ const run = (() => {
 https://theodinproject.com/lessons/todo-list
 
 
-1. Your ‘todos’ are going to be objects that you’ll want to dynamically create, hich means either using factories or constructors/classes to generate them.
+1. Your ‘todos’ are going to be objects that you’ll want to dynamically create, which means either using factories or constructors/classes to generate them.
 
 2. Brainstorm what kind of properties your todo-items are going to have. At a minimum they should have a 'title', 'description', 'dueDate' and 'priority'. You might also want to include 'notes' or even a 'checklist'.
 
@@ -23,5 +27,13 @@ https://theodinproject.com/lessons/todo-list
     view all todos in each project (probably just the title and duedate.. perhaps changing color for different priorities)
     expand a single todo to see/edit its details
     delete a todo
+
+
+
+
+
+put todos in an array as objects
+the objects must be editable
+make a separate file for DOMs?
 
 */
