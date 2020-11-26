@@ -1,3 +1,5 @@
+import { toDos } from "./init";
+
 //create delete button on cards
 function deleteCard() {
     const cards = document.querySelectorAll(".card");
@@ -51,33 +53,36 @@ function newCard() {
                     const form = document.createElement("form");
                         form.setAttribute("id", "newForm");
 
-                        function createForm(nameForm) {
+                        //function to create inputs
+                        function createForm(nameForm, inner, inputType, priValue) {
                             const label = document.createElement("label");
                                 label.setAttribute("for", `${nameForm}`);
-                                label.innerHTML = `${nameForm}: `;
+                                label.innerHTML = `${inner}: `;
                                 form.appendChild(label);
-                            if (nameForm == "Priority") {
-                                const input = document.createElement("input");
-                                    input.setAttribute("type", "radio");
-                                    input.setAttribute("name", `${nameForm}`);
-                                    form.appendChild(input);
-                            } else if (nameForm == "Notes") {
-                                const input = document.createElement("textarea");
-                                    input.setAttribute("name", `${nameForm}`);
-                                    form.appendChild(input);
-                            } else {
                             const input = document.createElement("input");
-                                input.setAttribute("type", "text");
+                                input.setAttribute("type", `${inputType}`);
                                 input.setAttribute("name", `${nameForm}`);
+                                if (inputType == "radio") {
+                                    input.setAttribute("value", `${priValue}`)
+                                };
                                 form.appendChild(input);
-                            }
                         };
             
-                        createForm("Title");
-                        createForm("Description");
-                        createForm("Due Date");
-                        createForm("Priority");
-                        createForm("Notes");
+                        createForm("Title", "Title", "text");
+                        createForm("Description", "Description", "text");
+                        createForm("DueDate", "Due Date", "date");
+                        createForm("Priority", "Low", "radio", "low");
+                        createForm("Priority", "Medium", "radio", "medium");
+                        createForm("Priority", "High", "radio", "high");
+
+                        const subBtn = document.createElement("input");
+                            subBtn.setAttribute("type", "button");
+                            subBtn.setAttribute("value", "Submit");
+                            subBtn.setAttribute("id", "subBtn");
+                            form.appendChild(subBtn);
+
+
+
                 
                         overBox.appendChild(form);
                     overlay.appendChild(overBox);
@@ -86,7 +91,14 @@ function newCard() {
         body.appendChild(newBtn);
 };
 
-//title, desc, dueDate, priority, notes
+/*
+const subBtn = document.querySelector("#subBtn")
+subBtn.addEventListener('click', function() {
+    new toDos(Title.value, Description.value, DueDate.value, Priority.value)
+}, false);
+*/
+
+//need to define the nameForm things
 
 //mark as complete
 
