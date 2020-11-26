@@ -6,7 +6,7 @@
     --dark: #6D6875;
 }
 
-* {
+body {
     margin: 0;
     background: var(--medium);
 }
@@ -44,6 +44,11 @@
     right: 0;
     bottom: 0;
     z-index: 2;
+}
+
+#newForm input {
+    display:block;
+    margin-bottom: 20px;
 }
 
 #help {
