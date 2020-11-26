@@ -49,9 +49,9 @@ function toDos(title, desc, dueDate, priority, notes) {
 };
 
 //TESTING adding items and calling them
-var testing = new toDos("Hi", "Yo", "12", "high", "yep");
+var testing = new toDos("title", "desc", "dueDate", "priority", "notes");
 var tested = new toDos("Sup", "Yo", "15", "high", "yep");
-var test = new toDos("Sup", "Yo", "15", "high", "yep");
+var test = new toDos("Yep", "Yo", "15", "high", "yep");
 
 
 
