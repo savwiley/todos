@@ -9,7 +9,7 @@ function toDos(title, desc, dueDate, priority, notes) {
     this.priorty = priority,
     this.notes = notes;
 
-    todosArr.push({title, desc, dueDate, priority, notes});
+    todosArr.push({title, desc, dueDate, priority});
 
     function makeCard() {
         const body = document.querySelector("#content");
@@ -37,11 +37,6 @@ function toDos(title, desc, dueDate, priority, notes) {
                 cPrior.textContent = priority;
                 card.appendChild(cPrior);
 
-            const cNotes = document.createElement("div");
-                cNotes.setAttribute("id", "notes");
-                cNotes.textContent = notes;
-                card.appendChild(cNotes);
-
         body.appendChild(card);
     }
 
@@ -49,10 +44,13 @@ function toDos(title, desc, dueDate, priority, notes) {
 };
 
 //TESTING adding items and calling them
-var testing = new toDos("title", "desc", "dueDate", "priority", "notes");
-var tested = new toDos("Sup", "Yo", "15", "high", "yep");
-var test = new toDos("Yep", "Yo", "15", "high", "yep");
+var testing = new toDos("title", "desc", "dueDate", "priority");
+var tested = new toDos("Sup", "Yo", "15", "high");
+var test = new toDos("Yep", "Yo", "15", "high");
 
+function init() {
+    toDos;
+}
 
 
 /*
