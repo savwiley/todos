@@ -1,13 +1,12 @@
 let todosArr = [];
 
 //To-Do List Object
-function toDos(title, desc, dueDate, priority, notes) {
+function toDos(title, desc, dueDate, priority) {
 
     this.title = title,
     this.desc = desc,
     this.dueDate = dueDate,
-    this.priorty = priority,
-    this.notes = notes;
+    this.priorty = priority;
 
     todosArr.push({title, desc, dueDate, priority});
 
@@ -18,22 +17,22 @@ function toDos(title, desc, dueDate, priority, notes) {
             card.setAttribute("id", todosArr.length);
 
             const cTitle = document.createElement("div");
-                cTitle.setAttribute("id", "title");
+                cTitle.setAttribute("id", "Title");
                 cTitle.textContent = title;
                 card.appendChild(cTitle);
 
             const cDesc = document.createElement("div");
-                cDesc.setAttribute("id", "desc");
+                cDesc.setAttribute("id", "Desc");
                 cDesc.textContent = desc;
                 card.appendChild(cDesc);
 
             const cDate = document.createElement("div");
-                cDate.setAttribute("id", "dueDate");
+                cDate.setAttribute("id", "DueDate");
                 cDate.textContent = dueDate;
                 card.appendChild(cDate);
 
             const cPrior = document.createElement("div");
-                cPrior.setAttribute("id", "priority");
+                cPrior.setAttribute("id", "Priority");
                 cPrior.textContent = priority;
                 card.appendChild(cPrior);
 
@@ -47,10 +46,6 @@ function toDos(title, desc, dueDate, priority, notes) {
 var testing = new toDos("title", "desc", "dueDate", "priority");
 var tested = new toDos("Sup", "Yo", "15", "high");
 var test = new toDos("Yep", "Yo", "15", "high");
-
-function init() {
-    toDos;
-}
 
 
 /*

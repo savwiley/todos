@@ -1,4 +1,4 @@
-import { toDos } from "./init";
+import {toDos} from "../modules/init";
 
 //create delete button on cards
 function deleteCard() {
@@ -43,7 +43,7 @@ function newCard() {
             newBtn.setAttribute("type", "button");
             newBtn.setAttribute("value", "New To-Do");
             newBtn.addEventListener('click', newForm);
-            function newForm() {
+
                 const overlay = document.createElement("div");
                     overlay.setAttribute("class", "overlay");
                     const overBox = document.createElement("div");
@@ -53,50 +53,90 @@ function newCard() {
                     const form = document.createElement("form");
                         form.setAttribute("id", "newForm");
 
-                        //function to create inputs
-                        function createForm(nameForm, inner, inputType, priValue) {
-                            const label = document.createElement("label");
-                                label.setAttribute("for", `${nameForm}`);
-                                label.innerHTML = `${inner}: `;
-                                form.appendChild(label);
-                            const input = document.createElement("input");
-                                input.setAttribute("type", `${inputType}`);
-                                input.setAttribute("name", `${nameForm}`);
-                                if (inputType == "radio") {
-                                    input.setAttribute("value", `${priValue}`)
-                                };
-                                form.appendChild(input);
-                        };
-            
-                        createForm("Title", "Title", "text");
-                        createForm("Description", "Description", "text");
-                        createForm("DueDate", "Due Date", "date");
-                        createForm("Priority", "Low", "radio", "low");
-                        createForm("Priority", "Medium", "radio", "medium");
-                        createForm("Priority", "High", "radio", "high");
+                        const titleL = document.createElement("label");
+                            titleL.setAttribute("for", "formTitle");
+                            titleL.innerHTML = "Title: ";
+                            form.appendChild(titleL);
+                        const titleI = document.createElement("input");
+                            titleI.setAttribute("type", "text");
+                            titleI.setAttribute("name", "title");
+                            titleI.setAttribute("id", "formTitle");
+                            form.appendChild(titleI);
 
+                        const descL = document.createElement("label");
+                            descL.setAttribute("for", "formDesc");
+                            descL.innerHTML = "Description: ";
+                            form.appendChild(descL);
+                        const descI = document.createElement("input");
+                            descI.setAttribute("type", "text");
+                            descI.setAttribute("name", "desc");
+                            titleI.setAttribute("id", "formDesc");
+                            form.appendChild(descI);
+
+                        const dueL = document.createElement("label");
+                            dueL.setAttribute("for", "formDueDate");
+                            dueL.innerHTML = "Due Date: ";
+                            form.appendChild(dueL);
+                        const dueI = document.createElement("input");
+                            dueI.setAttribute("type", "date");
+                            dueI.setAttribute("name", "dueDate");
+                            titleI.setAttribute("id", "formDueDate");
+                            form.appendChild(dueI);
+
+                        const priLabel = document.createElement("label");
+                            priLabel.setAttribute("for", "formPriority");
+                            priLabel.innerHTML = "Priority: ";
+                            form.appendChild(priLabel);
+                        const priority = document.createElement("select");
+                            priority.setAttribute("name", "priority");
+                            priority.setAttribute("id", "priority");
+                            form.appendChild(priority);
+                        const pLow = document.createElement("option");
+                            pLow.setAttribute("value", "low");
+                            pLow.innerHTML = "Low";
+                            priority.appendChild(pLow);
+                        const pMed = document.createElement("option");
+                            pMed.setAttribute("value", "medium");
+                            pMed.innerHTML = "Medium";
+                            priority.appendChild(pMed);
+                        const pHigh = document.createElement("option");
+                            pHigh.setAttribute("value", "high");
+                            pHigh.innerHTML = "High";
+                            priority.appendChild(pHigh);
+
+                        
                         const subBtn = document.createElement("input");
                             subBtn.setAttribute("type", "button");
                             subBtn.setAttribute("value", "Submit");
                             subBtn.setAttribute("id", "subBtn");
+                            subBtn.addEventListener('click', () => {
+                                new toDos(titleI.value, descI.value, dueI.value, priority.value)
+                            });
                             form.appendChild(subBtn);
 
-
-
-                
+                        const cancelBtn = document.createElement("input");
+                            cancelBtn.setAttribute("type", "button");
+                            cancelBtn.setAttribute("value", "Cancel");
+                            cancelBtn.setAttribute("id", "cancelBtn");
+                            cancelBtn.addEventListener("click", closeForm);
+                            form.appendChild(cancelBtn);
+                            
                         overBox.appendChild(form);
                     overlay.appendChild(overBox);
                 body.appendChild(overlay);
-            };
+
+            function newForm() {
+                const overlay = document.querySelector(".overlay");
+                return overlay.style.display = "block";
+            }
+
+            function closeForm() {
+                const overlay = document.querySelector(".overlay");
+                return overlay.style.display = "none";
+            }
+            
         body.appendChild(newBtn);
 };
-
-/*
-const subBtn = document.querySelector("#subBtn")
-subBtn.addEventListener('click', function() {
-    new toDos(Title.value, Description.value, DueDate.value, Priority.value)
-}, false);
-*/
 
 //need to define the nameForm things
 
