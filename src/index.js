@@ -8,8 +8,6 @@ const run = (() => {
     doms();
 })();
 
-
-
 /*
 
 https://theodinproject.com/lessons/todo-list
