@@ -1,4 +1,4 @@
-import {edCard} from "./modules/doms";
+import {edCard} from "../modules/doms";
 
 let todosArr = [];
 
@@ -42,30 +42,39 @@ function toDos(title, desc, dueDate, priority) {
                 cPrior.textContent = priority;
                 card.appendChild(cPrior);
 
-            
             const delBtn = document.createElement("input");
                 delBtn.setAttribute("id", "delete");
                 delBtn.setAttribute("type", "button");
                 delBtn.setAttribute("value", "X");
                 delBtn.addEventListener('click', delCard);
                 function delCard() {
-                    const cardID = document.getElementById(todosArr.length);
-                    cardID.remove();
+                    card.remove();
                 };
                 card.appendChild(delBtn);
-
-
 
             const edBtn = document.createElement("input");
                 edBtn.setAttribute("id", "edit");
                 edBtn.setAttribute("type", "button");
                 edBtn.setAttribute("value", "edit");
-                edBtn.addEventListener('click', edCard);
+                edBtn.addEventListener('click', () => {
+                    const cardID = card.getAttribute("id");
+                    edCard(cardID);
+                });
                 card.appendChild(edBtn);
 
-                // it's reading card as 'e' instead of 'r' in card.appendChild(edBtn). Figure out why.
-
-                //check on webpack. it's freaking out about the import
+            const complete = document.createElement("input");
+                complete.setAttribute("id", "complete");
+                complete.setAttribute("type", "checkbox");
+                complete.addEventListener('change', () => {
+                    if (complete.checked) {
+                        card.removeAttribute("class");
+                        card.setAttribute("class", "cardDone");
+                    } else {
+                        card.removeAttribute("class");
+                        card.setAttribute("class", "card");
+                    };
+                });
+                card.appendChild(complete);
 
         body.appendChild(card);
     }
