@@ -1,3 +1,5 @@
+import {edCard} from "./modules/doms";
+
 let todosArr = [];
 
 //To-Do List Object
@@ -18,23 +20,52 @@ function toDos(title, desc, dueDate, priority) {
 
             const cTitle = document.createElement("div");
                 cTitle.setAttribute("id", "Title");
+                cTitle.setAttribute("class", `titleIndex${todosArr.length}`);
                 cTitle.textContent = title;
                 card.appendChild(cTitle);
 
             const cDesc = document.createElement("div");
                 cDesc.setAttribute("id", "Desc");
+                cDesc.setAttribute("class", `descIndex${todosArr.length}`);
                 cDesc.textContent = desc;
                 card.appendChild(cDesc);
 
             const cDate = document.createElement("div");
                 cDate.setAttribute("id", "DueDate");
+                cDate.setAttribute("class", `dateIndex${todosArr.length}`);
                 cDate.textContent = dueDate;
                 card.appendChild(cDate);
 
             const cPrior = document.createElement("div");
                 cPrior.setAttribute("id", "Priority");
+                cPrior.setAttribute("class", `priIndex${todosArr.length}`);
                 cPrior.textContent = priority;
                 card.appendChild(cPrior);
+
+            
+            const delBtn = document.createElement("input");
+                delBtn.setAttribute("id", "delete");
+                delBtn.setAttribute("type", "button");
+                delBtn.setAttribute("value", "X");
+                delBtn.addEventListener('click', delCard);
+                function delCard() {
+                    const cardID = document.getElementById(todosArr.length);
+                    cardID.remove();
+                };
+                card.appendChild(delBtn);
+
+
+
+            const edBtn = document.createElement("input");
+                edBtn.setAttribute("id", "edit");
+                edBtn.setAttribute("type", "button");
+                edBtn.setAttribute("value", "edit");
+                edBtn.addEventListener('click', edCard);
+                card.appendChild(edBtn);
+
+                // it's reading card as 'e' instead of 'r' in card.appendChild(edBtn). Figure out why.
+
+                //check on webpack. it's freaking out about the import
 
         body.appendChild(card);
     }
@@ -46,6 +77,8 @@ function toDos(title, desc, dueDate, priority) {
 var testing = new toDos("title", "desc", "dueDate", "priority");
 var tested = new toDos("Sup", "Yo", "15", "high");
 var test = new toDos("Yep", "Yo", "15", "high");
+
+
 
 
 /*
@@ -62,3 +95,4 @@ make a separate file for DOMs?
 
 
 export {toDos};
+export {todosArr};
