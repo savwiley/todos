@@ -1,92 +1,7 @@
 import {toDos} from "../modules/init";
 import {todosArr} from "../modules/init";
 
-//create delete button on cards
-function deleteCard() {
-    const cards = document.querySelectorAll(".card");
-        cards.forEach(function del(e) {
-            const delBtn = document.createElement("input");
-                delBtn.setAttribute("id", "delete");
-                delBtn.setAttribute("type", "button");
-                delBtn.setAttribute("value", "X");
-                delBtn.addEventListener('click', delCard);
-                function delCard() {
-                    const cardID = e.getAttribute("id");
-                    const cardDIV = document.getElementById(`${cardID}`);
-                    cardDIV.remove();
-                };
-                e.appendChild(delBtn);
-        });
-};
-
-//create edit button on cards (the hard part)
-
-                function edCard() {
-                    //create new overlay
-                    newForm();
-
-                    //retrieve id and div
-                    const cardID = e.getAttribute("id");
-
-                    //retrieve text div elements
-                    const cTitle = document.querySelector(`.titleIndex${cardID}`);
-                    const cDesc = document.querySelector(`.descIndex${cardID}`);
-                    const cDate = document.querySelector(`.dateIndex${cardID}`);
-                    const cPriority = document.querySelector(`.priIndex${cardID}`);
-
-                    //retrieve input elements and input old values
-                    const titleI = document.getElementById("formTitle");
-                    titleI.setAttribute("value", cTitle.textContent);
-                    const descI = document.getElementById("formDesc");
-                    descI.setAttribute("value", cDesc.textContent);
-                    const dueI = document.getElementById("formDueDate");
-                    dueI.setAttribute("value", cDate.textContent);
-                    const priority = document.getElementById("priority");
-                    priority.setAttribute("value", cPriority.textContent);
-
-                    //remove unwanted buttons
-                    if (document.getElementById("edBtn")) {
-                        const oldEditBtn = document.getElementById("edBtn");
-                        oldEditBtn.remove();
-                    };
-
-                    const editBtn = document.querySelector("#subBtn");
-                        editBtn.setAttribute("value", "Edit");
-                        editBtn.removeEventListener("click", submit);
-                        editBtn.addEventListener("click", () => {
-                            //changes object and div information
-                            todosArr[cardID -1].title = titleI.value;
-                            cTitle.textContent = titleI.value;
-                            todosArr[cardID -1].desc = descI.value;
-                            cDesc.textContent = descI.value;
-                            todosArr[cardID -1].dueDate = dueI.value;
-                            cDate.textContent = dueI.value;
-                            todosArr[cardID -1].priority = priority.value;
-                            cPriority.textContent = priority.value;
-                        });
-
-                    //append button to form
-                    const form = document.getElementById("newForm");
-                    form.appendChild(editBtn);
-                };
-
-
-//create new card overlay
-function newCard() {
-    const body = document.querySelector("#content");
-        const newBtn = document.createElement("input");
-            newBtn.setAttribute("id", "newCard");
-            newBtn.setAttribute("type", "button");
-            newBtn.setAttribute("value", "New To-Do");
-            newBtn.addEventListener('click', newForm);
-        body.appendChild(newBtn);
-};
-
-
-
-
-
-
+//creates overlay and form
 const body = document.querySelector("#content");
 
 const overlay = document.createElement("div");
@@ -98,7 +13,7 @@ const overBox = document.createElement("div");
 const form = document.createElement("form");
     form.setAttribute("id", "newForm");
 
-    //title
+//title
 const titleL = document.createElement("label");
     titleL.setAttribute("for", "formTitle");
     titleL.innerHTML = "Title: ";
@@ -109,7 +24,7 @@ const titleI = document.createElement("input");
     titleI.setAttribute("id", "formTitle");
     form.appendChild(titleI);
 
-    //description
+//description
 const descL = document.createElement("label");
     descL.setAttribute("for", "formDesc");
     descL.innerHTML = "Description: ";
@@ -131,7 +46,7 @@ const dueI = document.createElement("input");
     dueI.setAttribute("id", "formDueDate");
     form.appendChild(dueI);
 
-    //priority dropdown menu
+//priority dropdown menu
 const priLabel = document.createElement("label");
     priLabel.setAttribute("for", "formPriority");
     priLabel.innerHTML = "Priority: ";
@@ -153,12 +68,15 @@ const pHigh = document.createElement("option");
     pHigh.innerHTML = "High";
     priority.appendChild(pHigh);
 
-    //cancel button
+//cancel button
 const cancelBtn = document.createElement("input");
     cancelBtn.setAttribute("type", "button");
     cancelBtn.setAttribute("value", "Cancel");
     cancelBtn.setAttribute("id", "cancelBtn");
-    cancelBtn.addEventListener("click", closeForm);
+    cancelBtn.addEventListener("click", () => {
+        const overlay = document.querySelector(".overlay");
+        overlay.style.display = "none";
+    });
     form.appendChild(cancelBtn);
 
 overBox.appendChild(form);
@@ -167,13 +85,16 @@ body.appendChild(overlay);
 
 
 
-
-function submit(){
-    new toDos(titleI.value, descI.value, dueI.value, priority.value)
-}
-
+//create a new form
 function newForm() {
+    //clears form
+    document.getElementById("formTitle").value = "";
+    document.getElementById("formDesc").value = "";
+    document.getElementById("formTitle").placeholder = "";
+    document.getElementById("formDesc").placeholder = "";
+
     const overlay = document.querySelector(".overlay");
+        overlay.style.display = "block";
     //remove unwanted buttons
     if (document.getElementById("subBtn")) {
         const oldSubBtn = document.getElementById("subBtn");
@@ -187,37 +108,75 @@ function newForm() {
         subBtn.setAttribute("id", "subBtn");
         subBtn.addEventListener('click', submit);
         form.appendChild(subBtn);
-    clearForm();
-    return overlay.style.display = "block";
-}
+};
 
-function closeForm() {
-    const overlay = document.querySelector(".overlay");
-    clearForm();
-    return overlay.style.display = "none";
-}
 
-function clearForm() {
+//submit new object/card
+//action needs its own function because it has to be removed via edit button
+function submit(){
+    new toDos(titleI.value, descI.value, dueI.value, priority.value)
+};
+
+
+//create new card button
+function newCard() {
+    const body = document.querySelector("#content");
+        const newBtn = document.createElement("input");
+            newBtn.setAttribute("id", "newCard");
+            newBtn.setAttribute("type", "button");
+            newBtn.setAttribute("value", "New To-Do");
+            newBtn.addEventListener('click', newForm);
+        body.appendChild(newBtn);
+};
+
+
+//edit button action overlay
+function edCard(e) {
+    //create new overlay
+    newForm();
+
+    //retrieve text div elements
+    const cTitle = document.querySelector(`.titleIndex${e}`);
+    const cDesc = document.querySelector(`.descIndex${e}`);
+    const cDate = document.querySelector(`.dateIndex${e}`);
+    const cPriority = document.querySelector(`.priIndex${e}`);
+
+    //retrieve input elements and input old values as placeholders
     const titleI = document.getElementById("formTitle");
-    titleI.setAttribute("value", "")
-    titleI.setAttribute("placeholder", "")
+        titleI.setAttribute("placeholder", cTitle.textContent);
     const descI = document.getElementById("formDesc");
-    descI.setAttribute("value", "")
-    descI.setAttribute("placeholder", "")
+        descI.setAttribute("placeholder", cDesc.textContent);
     const dueI = document.getElementById("formDueDate");
-    dueI.setAttribute("value", "")
-    dueI.setAttribute("placeholder", "")
-}
+    const priority = document.getElementById("priority");
 
-//mark as complete
+    //prevents form from creating new edit buttons everytime button is clicked
+    if (document.getElementById("edBtn")) {
+        const oldEditBtn = document.getElementById("edBtn");
+        oldEditBtn.remove();
+    };
+
+    //submitting the edited form
+    const editBtn = document.querySelector("#subBtn");
+        editBtn.setAttribute("value", "Edit");
+        editBtn.removeEventListener("click", submit);
+        editBtn.addEventListener("click", () => {
+            //changes object and div information
+            todosArr[e -1].title = titleI.value;
+            cTitle.textContent = titleI.value;
+            todosArr[e -1].desc = descI.value;
+            cDesc.textContent = descI.value;
+            todosArr[e -1].dueDate = dueI.value;
+            cDate.textContent = dueI.value;
+            todosArr[e -1].priority = priority.value;
+            cPriority.textContent = priority.value;
+        });
+
+    //append submit/edit button to form
+    const form = document.getElementById("newForm");
+        form.appendChild(editBtn);
+};
 
 //I'd like to make a fade effect
 
-
-function doms() {
-    deleteCard();
-    newCard();
-};
-
-export default doms;
+export {newCard};
 export {edCard};
