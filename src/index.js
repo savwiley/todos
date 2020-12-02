@@ -1,11 +1,11 @@
 import {toDos} from "./modules/init";
-import doms from "./modules/doms";
+import {newCard} from "./modules/doms";
 
 
 
 const run = (() => {
     toDos;
-    doms();
+    newCard();
 })();
 
 
