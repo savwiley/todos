@@ -11,12 +11,16 @@ body {
     background: var(--medium);
 }
 
-.card {
+.card, .cardDone {
     padding: 5px;
     width: 50%;
     min-height: 20%;
     margin: 0 auto 20px;
     background: var(--light);
+}
+.cardDone {
+    color: rgba(0,0,0,0.3);
+    font-style: italic;
 }
 
 .overlay {
