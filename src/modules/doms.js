@@ -1,9 +1,19 @@
 import {toDos} from "../modules/init";
 import {todosArr} from "../modules/init";
 
-//creates overlay and form
+//retrieves page
 const body = document.querySelector("#content");
 
+//retrieves card side
+const cardSide = document.querySelector(".cardside");
+
+//creates sidebar
+const sidebar = document.createElement("div");
+    sidebar.setAttribute("class", "sidebar");
+    body.appendChild(sidebar);
+
+
+//creates overlay and form
 const overlay = document.createElement("div");
     overlay.setAttribute("class", "overlay");
 const overBox = document.createElement("div");
@@ -118,15 +128,17 @@ function submit(){
 };
 
 
+
+
+
 //create new card button
 function newCard() {
-    const body = document.querySelector("#content");
         const newBtn = document.createElement("input");
             newBtn.setAttribute("id", "newCard");
             newBtn.setAttribute("type", "button");
             newBtn.setAttribute("value", "New To-Do");
             newBtn.addEventListener('click', newForm);
-        body.appendChild(newBtn);
+        sidebar.appendChild(newBtn);
 };
 
 
@@ -135,11 +147,13 @@ function edCard(e) {
     //create new overlay
     newForm();
 
+    //retrieve card
+    const card = document.getElementById(e);
+
     //retrieve text div elements
     const cTitle = document.querySelector(`.titleIndex${e}`);
     const cDesc = document.querySelector(`.descIndex${e}`);
     const cDate = document.querySelector(`.dateIndex${e}`);
-    const cPriority = document.querySelector(`.priIndex${e}`);
 
     //retrieve input elements and input old values as placeholders
     const titleI = document.getElementById("formTitle");
@@ -168,7 +182,13 @@ function edCard(e) {
             todosArr[e -1].dueDate = dueI.value;
             cDate.textContent = dueI.value;
             todosArr[e -1].priority = priority.value;
-            cPriority.textContent = priority.value;
+            if (priority.value == "low") {
+                card.style.borderColor = "green";
+            } else if (priority.value == "medium") {
+                card.style.borderColor = "yellow";
+            } else {
+                card.style.borderColor = "red";
+            }
         });
 
     //append submit/edit button to form
