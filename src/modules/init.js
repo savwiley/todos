@@ -1,6 +1,15 @@
 import {edCard} from "../modules/doms";
 
+//array for my todo objects
 let todosArr = [];
+
+//creates a place to put all of the todos
+const body = document.querySelector("#content");
+const cardSide = document.createElement("div");
+    cardSide.setAttribute("class", "cardside");
+    body.appendChild(cardSide);
+
+
 
 //To-Do List Object
 function toDos(title, desc, dueDate, priority) {
@@ -13,7 +22,7 @@ function toDos(title, desc, dueDate, priority) {
     todosArr.push({title, desc, dueDate, priority});
 
     //doms to create a new card
-    const body = document.querySelector("#content");
+    const cardSide = document.querySelector(".cardside");
     const card = document.createElement("div");
         card.setAttribute("class", "card");
         card.setAttribute("id", todosArr.length);
@@ -24,22 +33,28 @@ function toDos(title, desc, dueDate, priority) {
             cTitle.textContent = title;
             card.appendChild(cTitle);
 
+        const cDate = document.createElement("div");
+            cDate.setAttribute("id", "DueDate");
+            cDate.setAttribute("class", `dateIndex${todosArr.length}`);
+            cDate.textContent = `Due on ${dueDate}`;
+            card.appendChild(cDate);
+
         const cDesc = document.createElement("div");
             cDesc.setAttribute("id", "Desc");
             cDesc.setAttribute("class", `descIndex${todosArr.length}`);
             cDesc.textContent = desc;
             card.appendChild(cDesc);
 
-        const cDate = document.createElement("div");
-            cDate.setAttribute("id", "DueDate");
-            cDate.setAttribute("class", `dateIndex${todosArr.length}`);
-            cDate.textContent = dueDate;
-            card.appendChild(cDate);
-
         const cPrior = document.createElement("div");
             cPrior.setAttribute("id", "Priority");
             cPrior.setAttribute("class", `priIndex${todosArr.length}`);
-            cPrior.textContent = priority;
+            if (priority == "low") {
+                card.style.borderColor = "green";
+            } else if (priority == "medium") {
+                card.style.borderColor = "yellow";
+            } else {
+                card.style.borderColor = "red";
+            }
             card.appendChild(cPrior);
 
         const delBtn = document.createElement("input");
@@ -75,7 +90,7 @@ function toDos(title, desc, dueDate, priority) {
             });
             card.appendChild(complete);
 
-    body.appendChild(card);
+    cardSide.appendChild(card);
 };
 
 //TESTING adding items and calling them
@@ -96,10 +111,13 @@ var test = new toDos("Yep", "Yo", "15", "high");
 
     view all projects
         --that'll be the sidebar
-    view all todos in each project (probably just the title and duedate.. perhaps changing color for different priorities)
+
+    DONE    view all todos in each project (probably just the title and duedate. perhaps changing color for different priorities)
         --border color? like on the end and you can round the edges, like a tab?
+
     expand a single todo to see/edit its details
         --only showing title/date and making it bigger/more detailed onclick?
+
     delete a todo
         --Got this one, at least
 
