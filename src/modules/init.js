@@ -66,10 +66,10 @@ function toDos(title, desc, dueDate, priority) {
             });
             card.appendChild(delBtn);
 
-        const edBtn = document.createElement("input");
+        const edBtn = document.createElement("button");
             edBtn.setAttribute("id", "edit");
-            edBtn.setAttribute("type", "button");
-            edBtn.setAttribute("value", "edit");
+            edBtn.setAttribute("type", "submit");
+            edBtn.innerHTML = '<i class="fas fa-pen"></i>';
             edBtn.addEventListener('click', () => {
                 const cardID = card.getAttribute("id");
                 edCard(cardID);
@@ -83,9 +83,11 @@ function toDos(title, desc, dueDate, priority) {
                 if (complete.checked) {
                     card.removeAttribute("class");
                     card.setAttribute("class", "cardDone");
+                    complete.innerHTML = '<i class="fas fa-check"></i>';
                 } else {
                     card.removeAttribute("class");
                     card.setAttribute("class", "card");
+                    complete.innerHTML = '';
                 };
             });
             card.appendChild(complete);
