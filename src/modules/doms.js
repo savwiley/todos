@@ -156,6 +156,8 @@ function edCard(e) {
     const cDate = document.querySelector(`.dateIndex${e}`);
 
     //retrieve input elements and input old values as placeholders
+
+    //MAKE THESE VALUES NOT PLACEHOLDERS
     const titleI = document.getElementById("formTitle");
         titleI.setAttribute("placeholder", cTitle.textContent);
     const descI = document.getElementById("formDesc");
@@ -180,7 +182,7 @@ function edCard(e) {
             todosArr[e -1].desc = descI.value;
             cDesc.textContent = descI.value;
             todosArr[e -1].dueDate = dueI.value;
-            cDate.textContent = dueI.value;
+            cDate.textContent = `Due on ${dueI.value}`;
             todosArr[e -1].priority = priority.value;
             if (priority.value == "low") {
                 card.style.borderColor = "green";
