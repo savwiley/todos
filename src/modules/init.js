@@ -12,19 +12,20 @@ const cardSide = document.createElement("div");
 
 
 //To-Do List Object
-function toDos(title, desc, dueDate, priority) {
+function toDos(title, desc, dueDate, priority, project) {
 
     this.title = title,
     this.desc = desc,
     this.dueDate = dueDate,
     this.priorty = priority;
 
-    todosArr.push({title, desc, dueDate, priority});
+    todosArr.push({title, desc, dueDate, priority, project});
 
     //doms to create a new card
     const cardSide = document.querySelector(".cardside");
     const card = document.createElement("div");
-        card.setAttribute("class", "card");
+        card.setAttribute("class", `card`);
+        card.setAttribute("data-proj", project);
         card.setAttribute("id", todosArr.length);
 
         const cTitle = document.createElement("div");
@@ -96,9 +97,9 @@ function toDos(title, desc, dueDate, priority) {
 };
 
 //TESTING adding items and calling them
-var testing = new toDos("title", "desc", "dueDate", "priority");
-var tested = new toDos("Sup", "Yo", "15", "high");
-var test = new toDos("Yep", "Yo", "15", "high");
+var testing = new toDos("title", "desc", "dueDate", "priority", 0);
+var tested = new toDos("Sup", "Yo", "15", "high", 1);
+var test = new toDos("Yep", "Yo", "15", "high", 1);
 
 
 
@@ -123,7 +124,14 @@ var test = new toDos("Yep", "Yo", "15", "high");
     delete a todo
         --Got this one, at least
 
+--MAKE A DEFAULT ONE so that you can see them all
+
 --How are they going to make new projects/lists/pages? Create a btn/form and use DOMS to make a new page with the information provided. But how do I put todos in them? Make it a part of the todo itself like priority/date/etc. Use that as an id to put it in the proper place? Data-key, maybe?
+
+
+--Maybe arrange the buttons on the side of the cards
+
+--Do I want pages or drop down menus?
 
 
 
