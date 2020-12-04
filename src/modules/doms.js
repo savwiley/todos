@@ -1,6 +1,9 @@
 import {toDos} from "../modules/init";
 import {todosArr} from "../modules/init";
 
+//array of projects
+let projects = [];
+
 //retrieves page
 const body = document.querySelector("#content");
 
@@ -78,6 +81,16 @@ const pHigh = document.createElement("option");
     pHigh.innerHTML = "High";
     priority.appendChild(pHigh);
 
+//project dropdown menu
+const projLabel = document.createElement("label");
+    projLabel.setAttribute("for", "formProject");
+    projLabel.innerHTML = "Project: ";
+    form.appendChild(projLabel);
+const project = document.createElement("select");
+    project.setAttribute("name", "project");
+    project.setAttribute("id", "project");
+    form.appendChild(project);
+
 //cancel button
 const cancelBtn = document.createElement("input");
     cancelBtn.setAttribute("type", "button");
@@ -129,6 +142,57 @@ function submit(){
 
 
 
+
+//create project input
+function newProject() {
+
+    //new project input
+    const newProjForm = document.createElement("input");
+        newProjForm.setAttribute("id", "newProjForm");
+        newProjForm.setAttribute("type", "text");
+        newProjForm.setAttribute("placeholder", "Project Name");
+        sidebar.appendChild(newProjForm);
+
+    //creates button to add new projects
+    const newProjBtn = document.createElement("input");
+        newProjBtn.setAttribute("id", "newProjBtn");
+        newProjBtn.setAttribute("type", "button");
+        newProjBtn.setAttribute("value", "Make New Project");
+
+        //creates a new project button
+        newProjBtn.addEventListener("click", () => {
+            const newProj = document.createElement("input");
+                newProj.setAttribute("class", "projBtn");
+                newProj.setAttribute("id", projects.length);
+                newProj.setAttribute("type", "button");
+                newProj.setAttribute("value", newProjForm.value);
+                projects.push(newProjForm.value);
+
+                //adds project to new/edit todo form
+                const projOpt = document.createElement("option");
+                    projOpt.setAttribute("value", projects.length);
+                    projOpt.innerHTML = newProjForm.value;
+                    project.appendChild(projOpt);
+
+                //filters between projects
+                newProj.addEventListener("click", () => {
+                    const card = document.querySelectorAll(".card");
+                        card.forEach((e) => {
+                            const cardProj = e.getAttribute("data-proj");
+                            const projNumb = newProj.getAttribute("id");
+                            if (cardProj !== projNumb) {
+                                e.style.display = "none";
+                            } else {
+                                e.style.display = "block";
+                            }
+                        })
+                }) 
+
+                sidebar.appendChild(newProj);
+        });
+
+        sidebar.appendChild(newProjBtn);
+};
 
 
 //create new card button
@@ -202,3 +266,4 @@ function edCard(e) {
 
 export {newCard};
 export {edCard};
+export {newProject};
