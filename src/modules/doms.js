@@ -40,9 +40,10 @@ const titleI = document.createElement("input");
 //description
 const descL = document.createElement("label");
     descL.setAttribute("for", "formDesc");
+    descL.setAttribute("id", "descLabel");
     descL.innerHTML = "Description: ";
     form.appendChild(descL);
-const descI = document.createElement("input");
+const descI = document.createElement("textarea");
     descI.setAttribute("type", "text");
     descI.setAttribute("name", "desc");
     descI.setAttribute("id", "formDesc");
@@ -194,6 +195,20 @@ function newProject() {
         sidebar.appendChild(newProjBtn);
 };
 
+function defaultProj() {
+    const defaultProj = document.createElement("input");
+        defaultProj.setAttribute("id", "defaultProj");
+        defaultProj.setAttribute("type", "button");
+        defaultProj.setAttribute("value", "See All");
+        defaultProj.addEventListener("click", () => {
+            const card = document.querySelectorAll(".card");
+                card.forEach((e) => {
+                    e.style.display = "block";
+                });
+        });
+        sidebar.appendChild(defaultProj);
+};
+
 
 //create new card button
 function newCard() {
@@ -264,6 +279,11 @@ function edCard(e) {
 
 //I'd like to make a fade effect
 
-export {newCard};
+function doms() {
+    newCard();
+    newProject();
+    defaultProj();
+};
+
+export default doms;
 export {edCard};
-export {newProject};
