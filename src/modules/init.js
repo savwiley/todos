@@ -40,6 +40,22 @@ function toDos(title, desc, dueDate, priority, project) {
             cDate.textContent = `Due on ${dueDate}`;
             card.appendChild(cDate);
 
+        const complete = document.createElement("input");
+            complete.setAttribute("id", "complete");
+            complete.setAttribute("type", "checkbox");
+            complete.addEventListener('change', () => {
+                if (complete.checked) {
+                    card.removeAttribute("class");
+                    card.setAttribute("class", "cardDone");
+                    complete.innerHTML = '<i class="fas fa-check"></i>';
+                } else {
+                    card.removeAttribute("class");
+                    card.setAttribute("class", "card");
+                    complete.innerHTML = '';
+                };
+            });
+            card.appendChild(complete);
+
         const cDesc = document.createElement("div");
             cDesc.setAttribute("id", "Desc");
             cDesc.setAttribute("class", `descIndex${todosArr.length}`);
@@ -77,22 +93,6 @@ function toDos(title, desc, dueDate, priority, project) {
             });
             card.appendChild(edBtn);
 
-        const complete = document.createElement("input");
-            complete.setAttribute("id", "complete");
-            complete.setAttribute("type", "checkbox");
-            complete.addEventListener('change', () => {
-                if (complete.checked) {
-                    card.removeAttribute("class");
-                    card.setAttribute("class", "cardDone");
-                    complete.innerHTML = '<i class="fas fa-check"></i>';
-                } else {
-                    card.removeAttribute("class");
-                    card.setAttribute("class", "card");
-                    complete.innerHTML = '';
-                };
-            });
-            card.appendChild(complete);
-
     cardSide.appendChild(card);
 };
 
@@ -112,7 +112,7 @@ var test = new toDos("Yep", "Yo", "15", "high", 1);
 
 5. The look of the User Interface is up to you, but it should be able to do the following:
 
-    view all projects
+    DONE    view all projects
         --that'll be the sidebar
 
     DONE    view all todos in each project (probably just the title and duedate. perhaps changing color for different priorities)
@@ -121,17 +121,9 @@ var test = new toDos("Yep", "Yo", "15", "high", 1);
     expand a single todo to see/edit its details
         --only showing title/date and making it bigger/more detailed onclick?
 
-    delete a todo
+    DONE    delete a todo
         --Got this one, at least
 
---MAKE A DEFAULT ONE so that you can see them all
-
---How are they going to make new projects/lists/pages? Create a btn/form and use DOMS to make a new page with the information provided. But how do I put todos in them? Make it a part of the todo itself like priority/date/etc. Use that as an id to put it in the proper place? Data-key, maybe?
-
-
---Maybe arrange the buttons on the side of the cards
-
---Do I want pages or drop down menus?
 
 
 
