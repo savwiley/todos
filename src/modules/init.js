@@ -89,7 +89,7 @@ function toDos(title, desc, dueDate, priority, project) {
             edBtn.innerHTML = '<i class="fas fa-pen"></i>';
             edBtn.addEventListener('click', () => {
                 const cardID = card.getAttribute("id");
-                edCard(cardID);
+                edCard(card, cardID);
             });
             card.appendChild(edBtn);
 
@@ -118,7 +118,7 @@ var test = new toDos("Yep", "Yo", "15", "high", 1);
     DONE    view all todos in each project (probably just the title and duedate. perhaps changing color for different priorities)
         --border color? like on the end and you can round the edges, like a tab?
 
-    expand a single todo to see/edit its details
+    DONE    expand a single todo to see/edit its details
         --only showing title/date and making it bigger/more detailed onclick?
 
     DONE    delete a todo
@@ -126,12 +126,63 @@ var test = new toDos("Yep", "Yo", "15", "high", 1);
 
 
 
+NEW PROJECTS don't filter into current projects
+    "data-proj = undefined"
+    the value isn't submitted at all
+
 
 'title', 'description', 'dueDate' and 'priority'. You might also want to include 'notes' or even a 'checklist'.
 
 put todos in an array as objects
 the objects must be editable
 make a separate file for DOMs?
+
+
+
+
+
+
+
+TO-DO (haha)
+
+DONE
+-NEW TODOS DON'T FILTER INTO PROJECTS
+    "data-proj = undefined"
+    the value isn't submitted at all
+    the value doesn't change when editing todos
+    border of proj btn changes color if editing todo with a different priority
+DONE
+
+- make sidebar pretty
+    make "see all" btn prominent
+    make "add proj" btn into a "+"
+    make proj btns look nice and list-like
+    make sure overflow of projs can scroll
+    try a solid border instead of box shadow
+    after submitting new proj, clear input value
+
+- fix form
+    get them in a grid/flex sort of config
+    make the btns/selects look nice
+
+-pretty up the cards
+    change the colors of priorities
+    change the colors of complete todos
+    perhaps add the proj title at the top?
+
+-in JS land
+    be able to edit project names
+    figure out how to fade things (try css first)
+    fix the dates
+    figure out how to save info (check TOP)
+    should I add proj to card DIVs?
+    maybe split up functions in doms to other modules
+    DONE fix the form values/placeholders on edit again
+
+-other
+    should I try a header?
+    make the default todos/projs
+    overall make it look a little less like the 70s
 
 */
 
