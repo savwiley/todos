@@ -1,13 +1,11 @@
 import {toDos} from "./modules/init";
-import {newCard} from "./modules/doms";
-import {newProject} from "./modules/doms";
+import doms from "./modules/doms";
 
 
 
 const run = (() => {
     toDos;
-    newCard();
-    newProject();
+    doms();
 })();
 
 
