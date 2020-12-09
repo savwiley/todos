@@ -1,10 +1,13 @@
 import {toDos} from "./modules/init";
+import {storage} from "./modules/init";
 import doms from "./modules/doms";
 
 
 
 const run = (() => {
     toDos;
+    storage();
+    //localStorage.clear();
     doms();
 })();
 
