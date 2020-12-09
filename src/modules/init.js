@@ -3,6 +3,14 @@ import {edCard} from "../modules/doms";
 //array for my todo objects
 let todosArr = [];
 
+
+
+
+
+
+
+//https://www.youtube.com/watch?v=rVyTjFofok0
+
 //creates a place to put all of the todos
 const body = document.querySelector("#content");
 const cardSide = document.createElement("div");
@@ -97,9 +105,34 @@ function toDos(title, desc, dueDate, priority, project) {
 };
 
 //TESTING adding items and calling them
-var testing = new toDos("title", "desc", "dueDate", "priority", 0);
-var tested = new toDos("Sup", "Yo", "15", "high", 1);
-var test = new toDos("Yep", "Yo", "15", "high", 1);
+
+//var testing = new toDos("title", "desc", "dueDate", "priority", 0);
+//var tested = new toDos("Sup", "Yo", "15", "high", 1);
+//var test = new toDos("Yep", "Yo", "15", "high", 1);
+
+
+//localStorage
+function getArr() {
+    for (let i = 0; i < localStorage.length; i++) {
+        const array = localStorage.getItem(`item${i}`);
+        const obj = JSON.parse(array);
+        new toDos(obj.title, obj.desc, obj.dueDate, obj.priority, obj.project);
+    }
+};
+
+function storeArr() {
+    for (let i = 0; i < todosArr.length; i++) {
+        localStorage.setItem(`item${i}`, JSON.stringify(todosArr[i]));
+    }
+};
+
+function storage() {
+    if (localStorage){
+        getArr();
+    } else {
+        storeArr();
+    }
+};
 
 
 
@@ -174,10 +207,12 @@ DONE
     be able to edit project names
     figure out how to fade things (try css first)
     fix the dates
-    figure out how to save info (check TOP)
+        https://github.com/date-fns/date-fns
+    DONE figure out how to save info (check TOP)
     should I add proj to card DIVs?
     maybe split up functions in doms to other modules
     DONE fix the form values/placeholders on edit again
+    maybe put in dummy todos as examples
 
 -other
     should I try a header?
@@ -191,3 +226,5 @@ DONE
 
 export {toDos};
 export {todosArr};
+export {storage};
+export {storeArr};
