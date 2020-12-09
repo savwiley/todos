@@ -140,8 +140,12 @@ function newForm() {
 //submit new object/card
 //action needs its own function because it has to be removed via edit button
 function submit(){
+<<<<<<< HEAD
     new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
     storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
+=======
+    new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value)
+>>>>>>> 4d428d5d6930fbdcf62536a4dda0167e75f6338f
 };
 
 
