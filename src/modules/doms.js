@@ -1,5 +1,6 @@
 import {toDos} from "../modules/init";
 import {todosArr} from "../modules/init";
+import {storeArr} from "../modules/init";
 
 //array of projects
 let projects = [];
@@ -114,8 +115,9 @@ function newForm() {
     //clears form
     document.getElementById("formTitle").value = "";
     document.getElementById("formDesc").value = "";
-    document.getElementById("formTitle").placeholder = "";
-    document.getElementById("formDesc").placeholder = "";
+    document.getElementById("formDueDate").value = "";
+    document.getElementById("priority").value = "";
+    document.getElementById("project").value = "";
 
     const overlay = document.querySelector(".overlay");
         overlay.style.display = "block";
@@ -138,7 +140,8 @@ function newForm() {
 //submit new object/card
 //action needs its own function because it has to be removed via edit button
 function submit(){
-    new toDos(titleI.value, descI.value, dueI.value, priority.value)
+    new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
+    storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
 };
 
 
@@ -171,7 +174,7 @@ function newProject() {
 
                 //adds project to new/edit todo form
                 const projOpt = document.createElement("option");
-                    projOpt.setAttribute("value", projects.length);
+                    projOpt.setAttribute("value", (projects.length - 1));
                     projOpt.innerHTML = newProjForm.value;
                     project.appendChild(projOpt);
 
@@ -194,6 +197,10 @@ function newProject() {
 
         sidebar.appendChild(newProjBtn);
 };
+
+
+
+
 
 function defaultProj() {
     const defaultProj = document.createElement("input");
@@ -222,27 +229,26 @@ function newCard() {
 
 
 //edit button action overlay
-function edCard(e) {
+function edCard(card, cardID) {
     //create new overlay
     newForm();
 
-    //retrieve card
-    const card = document.getElementById(e);
-
     //retrieve text div elements
-    const cTitle = document.querySelector(`.titleIndex${e}`);
-    const cDesc = document.querySelector(`.descIndex${e}`);
-    const cDate = document.querySelector(`.dateIndex${e}`);
+    const cTitle = document.querySelector(`.titleIndex${cardID}`);
+    const cDesc = document.querySelector(`.descIndex${cardID}`);
+    const cDate = document.querySelector(`.dateIndex${cardID}`);
 
-    //retrieve input elements and input old values as placeholders
-
-    //MAKE THESE VALUES NOT PLACEHOLDERS
+    //retrieve input elements and input old values
     const titleI = document.getElementById("formTitle");
-        titleI.setAttribute("placeholder", cTitle.textContent);
+        titleI.value = cTitle.textContent;
     const descI = document.getElementById("formDesc");
-        descI.setAttribute("placeholder", cDesc.textContent);
+        descI.value = cDesc.textContent;
     const dueI = document.getElementById("formDueDate");
+        dueI.value = todosArr[cardID -1].dueDate;
     const priority = document.getElementById("priority");
+        priority.value = todosArr[cardID -1].priority;
+    const project = document.getElementById("project");
+        project.value = todosArr[cardID -1].project;
 
     //prevents form from creating new edit buttons everytime button is clicked
     if (document.getElementById("edBtn")) {
@@ -256,13 +262,13 @@ function edCard(e) {
         editBtn.removeEventListener("click", submit);
         editBtn.addEventListener("click", () => {
             //changes object and div information
-            todosArr[e -1].title = titleI.value;
+            todosArr[cardID -1].title = titleI.value;
             cTitle.textContent = titleI.value;
-            todosArr[e -1].desc = descI.value;
+            todosArr[cardID -1].desc = descI.value;
             cDesc.textContent = descI.value;
-            todosArr[e -1].dueDate = dueI.value;
+            todosArr[cardID -1].dueDate = dueI.value;
             cDate.textContent = `Due on ${dueI.value}`;
-            todosArr[e -1].priority = priority.value;
+            todosArr[cardID -1].priority = priority.value;
             if (priority.value == "low") {
                 card.style.borderColor = "green";
             } else if (priority.value == "medium") {
@@ -270,6 +276,8 @@ function edCard(e) {
             } else {
                 card.style.borderColor = "red";
             }
+            todosArr[cardID - 1].project = project.value;
+            card.setAttribute("data-proj", project.value);
         });
 
     //append submit/edit button to form
