@@ -34,6 +34,8 @@ input[type=text] {
     box-shadow: 4px 0 4px rgba(0,0,0,0.4);
     width: 300px;
     height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #newCard {
@@ -54,6 +56,13 @@ input[type=text] {
 
 #newProjForm {
     margin-top: 100px;
+}
+
+.projBtn {
+    display:block;
+    margin: 10px auto;
+    width: 90%;
+    padding: 5px;
 }
 
 
