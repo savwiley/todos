@@ -1,16 +1,20 @@
-import {toDos} from "./modules/init";
-import {storage} from "./modules/init";
+import {toDos, storage} from "./modules/init";
 import doms from "./modules/doms";
+import {storageProj} from "./modules/doms";
 
 
 
 const run = (() => {
     toDos;
-    storage();
-    //localStorage.clear();
+    //storage();
+    //storageProj();
+    localStorage.clear();
     doms();
 })();
 
+
+//FROM WEBPACK
+//export 'doms' (imported as 'doms') was not found in './modules/doms' (possible exports: default, edCard, storageProj)
 
 /*
 
