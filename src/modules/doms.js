@@ -1,15 +1,10 @@
-import {toDos} from "../modules/init";
-import {todosArr} from "../modules/init";
-import {storeArr} from "../modules/init";
+import {toDos, todosArr, storeArr} from "../modules/init";
 
 //array of projects
 let projects = [];
 
 //retrieves page
 const body = document.querySelector("#content");
-
-//retrieves card side
-const cardSide = document.querySelector(".cardside");
 
 //creates sidebar
 const sidebar = document.createElement("div");
@@ -140,12 +135,8 @@ function newForm() {
 //submit new object/card
 //action needs its own function because it has to be removed via edit button
 function submit(){
-<<<<<<< HEAD
     new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
     storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
-=======
-    new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value)
->>>>>>> 4d428d5d6930fbdcf62536a4dda0167e75f6338f
 };
 
 
@@ -165,7 +156,7 @@ function newProject() {
     const newProjBtn = document.createElement("input");
         newProjBtn.setAttribute("id", "newProjBtn");
         newProjBtn.setAttribute("type", "button");
-        newProjBtn.setAttribute("value", "Make New Project");
+        newProjBtn.setAttribute("value", "+");
 
         //creates a new project button
         newProjBtn.addEventListener("click", () => {
@@ -175,6 +166,7 @@ function newProject() {
                 newProj.setAttribute("type", "button");
                 newProj.setAttribute("value", newProjForm.value);
                 projects.push(newProjForm.value);
+                storeProj();
 
                 //adds project to new/edit todo form
                 const projOpt = document.createElement("option");
@@ -204,10 +196,66 @@ function newProject() {
 
 
 
+//localStorage
+function getProj() {
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.getItem(`proj${i}`)) {
+            const btn = localStorage.getItem(`proj${i}`);
+            const newProj = document.createElement("input");
+                newProj.setAttribute("class", "projBtn");
+                newProj.setAttribute("id", projects.length);
+                newProj.setAttribute("type", "button");
+                newProj.setAttribute("value", btn);
+                projects.push(btn);
+
+                //adds project to new/edit todo form
+                const projOpt = document.createElement("option");
+                    projOpt.setAttribute("value", (projects.length - 1));
+                    projOpt.innerHTML = btn;
+                    project.appendChild(projOpt);
+
+                //filters between projects
+                newProj.addEventListener("click", () => {
+                    const card = document.querySelectorAll(".card");
+                        card.forEach((e) => {
+                            const cardProj = e.getAttribute("data-proj");
+                            const projNumb = newProj.getAttribute("id");
+                            if (cardProj !== projNumb) {
+                                e.style.display = "none";
+                            } else {
+                                e.style.display = "block";
+                            }
+                        })
+                }) 
+
+                sidebar.appendChild(newProj);
+        } else {
+            storeProj();
+        }
+    }
+};
+
+function storeProj() {
+    for (let i = 0; i < projects.length; i++) {
+        localStorage.setItem(`proj${i}`, projects[i]);
+    }
+};
+
+function storageProj() {
+    if (localStorage){
+        getProj();
+    } else {
+        storeProj();
+    }
+};
+
+
+
 
 
 function defaultProj() {
     const defaultProj = document.createElement("input");
+        defaultProj.setAttribute("class", "projBtn");
         defaultProj.setAttribute("id", "defaultProj");
         defaultProj.setAttribute("type", "button");
         defaultProj.setAttribute("value", "See All");
@@ -299,3 +347,4 @@ function doms() {
 
 export default doms;
 export {edCard};
+export {storageProj};
