@@ -1,12 +1,8 @@
 import {edCard} from "../modules/doms";
+import {parseISO, format} from 'date-fns';
 
 //array for my todo objects
 let todosArr = [];
-
-
-
-
-
 
 
 //https://www.youtube.com/watch?v=rVyTjFofok0
@@ -29,6 +25,8 @@ function toDos(title, desc, dueDate, priority, project) {
 
     todosArr.push({title, desc, dueDate, priority, project});
 
+    const newDate = format(new Date(parseISO(`${dueDate}T00:00:00`)), 'P');
+
     //doms to create a new card
     const cardSide = document.querySelector(".cardside");
     const card = document.createElement("div");
@@ -45,7 +43,7 @@ function toDos(title, desc, dueDate, priority, project) {
         const cDate = document.createElement("div");
             cDate.setAttribute("id", "DueDate");
             cDate.setAttribute("class", `dateIndex${todosArr.length}`);
-            cDate.textContent = `Due on ${dueDate}`;
+            cDate.textContent = `Due on ${newDate}`;
             card.appendChild(cDate);
 
         const complete = document.createElement("input");
@@ -114,9 +112,13 @@ function toDos(title, desc, dueDate, priority, project) {
 //localStorage
 function getArr() {
     for (let i = 0; i < localStorage.length; i++) {
-        const array = localStorage.getItem(`item${i}`);
-        const obj = JSON.parse(array);
-        new toDos(obj.title, obj.desc, obj.dueDate, obj.priority, obj.project);
+        if (localStorage.getItem(`item${i}`)){
+            const array = localStorage.getItem(`item${i}`);
+            const obj = JSON.parse(array);
+            new toDos(obj.title, obj.desc, obj.dueDate, obj.priority, obj.project);
+        } else {
+            storeArr();
+        }
     }
 };
 
@@ -206,7 +208,7 @@ DONE
 -in JS land
     be able to edit project names
     figure out how to fade things (try css first)
-    fix the dates
+    DONE fix the dates
         https://github.com/date-fns/date-fns
     DONE figure out how to save info (check TOP)
     should I add proj to card DIVs?
