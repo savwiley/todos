@@ -4,9 +4,6 @@ import {parseISO, format} from 'date-fns';
 //array for my todo objects
 let todosArr = [];
 
-
-//https://www.youtube.com/watch?v=rVyTjFofok0
-
 //creates a place to put all of the todos
 const body = document.querySelector("#content");
 const cardSide = document.createElement("div");
@@ -23,8 +20,10 @@ function toDos(title, desc, dueDate, priority, project) {
     this.dueDate = dueDate,
     this.priorty = priority;
 
+    //pushes objects into array
     todosArr.push({title, desc, dueDate, priority, project});
 
+    //creates new date format with date-fns
     const newDate = format(new Date(parseISO(`${dueDate}T00:00:00`)), 'P');
 
     //doms to create a new card
@@ -46,6 +45,7 @@ function toDos(title, desc, dueDate, priority, project) {
             cDate.textContent = `Due on ${newDate}`;
             card.appendChild(cDate);
 
+        //the checkbox
         const complete = document.createElement("input");
             complete.setAttribute("id", "complete");
             complete.setAttribute("type", "checkbox");
@@ -86,6 +86,7 @@ function toDos(title, desc, dueDate, priority, project) {
             delBtn.setAttribute("value", "X");
             delBtn.addEventListener('click', () => {
                 card.remove();
+                localStorage.removeItem(`item${(todosArr.length - 1)}`)
             });
             card.appendChild(delBtn);
 
@@ -188,38 +189,51 @@ DONE
     border of proj btn changes color if editing todo with a different priority
 DONE
 
+DONE
 - make sidebar pretty
     make "see all" btn prominent
-    make "add proj" btn into a "+"
-    make proj btns look nice and list-like
-    make sure overflow of projs can scroll
-    try a solid border instead of box shadow
-    after submitting new proj, clear input value
+    DONE make "add proj" btn into a "+"
+    DONE make proj btns look nice and list-like
+    DONE make sure overflow of projs can scroll
+    MEH try a solid border instead of box shadow
+    CHECK ON THIS after submitting new proj, clear input value
+DONE
 
+DONE
 - fix form
-    get them in a grid/flex sort of config
+    DONE get them in a grid/flex sort of config
     make the btns/selects look nice
+DONE
 
+CALLING THIS DONE
 -pretty up the cards
-    change the colors of priorities
+    MEH change the colors of priorities
     change the colors of complete todos
     perhaps add the proj title at the top?
+DONE
 
+DONE
 -in JS land
-    be able to edit project names
-    figure out how to fade things (try css first)
+    MEH be able to edit project names
     DONE fix the dates
         https://github.com/date-fns/date-fns
     DONE figure out how to save info (check TOP)
-    should I add proj to card DIVs?
-    maybe split up functions in doms to other modules
+    NOPE maybe split up functions in doms to other modules
     DONE fix the form values/placeholders on edit again
-    maybe put in dummy todos as examples
+    NOPE maybe put in dummy todos as examples
+DONE
 
+DONE
 -other
-    should I try a header?
-    make the default todos/projs
-    overall make it look a little less like the 70s
+    NOPE should I try a header?
+    DONE make the default todos/projs
+    FOREVER WIP overall make it look a little less like the 70s
+DONE
+
+
+
+    Delete projects
+    Add credit
 
 */
 

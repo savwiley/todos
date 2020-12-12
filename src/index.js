@@ -6,15 +6,13 @@ import {storageProj} from "./modules/doms";
 
 const run = (() => {
     toDos;
-    //storage();
-    //storageProj();
-    localStorage.clear();
+    storage();
+    //localStorage.clear();
     doms();
+    storageProj();
 })();
 
 
-//FROM WEBPACK
-//export 'doms' (imported as 'doms') was not found in './modules/doms' (possible exports: default, edCard, storageProj)
 
 /*
 
