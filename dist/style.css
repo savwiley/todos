@@ -1,9 +1,9 @@
 :root {
-    --light: #CFE8EF;
+    --light: #eaf6fa;
     --lighter: #C6DBF0;
     --medium: #AED1E6;
     --darker: #A0C4E2;
-    --dark: #85C7DE;
+    --dark: #6296a8;
 }
 
 
@@ -11,8 +11,7 @@
 
 body {
     margin: 0;
-    background: url("../images/transparent-square-tiles.png"), var(--darker);
-    background-attachment:fixed;
+    background: var(--light);
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -21,7 +20,7 @@ input, select, button {
     outline:none;
 }
 input[type=text] {
-    cursor: text;
+    cursor:text;
     outline:none;
 }
 
@@ -30,7 +29,8 @@ input[type=text] {
 
 .sidebar {
     position:fixed;
-    background: var(--lighter);
+    background: url("../images/transparent-square-tiles.png"), var(--medium);
+    background-attachment:fixed;
     box-shadow: 4px 0 4px rgba(0,0,0,0.4);
     width: 300px;
     height: 100vh;
@@ -39,51 +39,78 @@ input[type=text] {
 }
 
 #newCard {
-    background: var(--dark);
-    border: none;
-    border-radius: 50px;
+    background: var(--lighter);
+    border: 3px outset var(--dark);
+    border-radius: 5px;
     font-size: 30px;
+    font-weight:bold;
     padding: 5px 20px 10px 20px;
     font-variant:small-caps;
     position:relative;
     left: 50px;
     top: 50px;
-    transition: all 1s;
 }
-#newCard:hover {
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-}
+#newCard:active {border: 3px inset var(--dark);}
 
 #newProjForm {
+    background: var(--light);
     margin-top: 100px;
+    margin-left: 2.5%;
+    width: 90%;
+    border: 2px solid var(--dark);
+    border-radius: 3px;
+    padding: 5px;
+}
+#newProjForm:focus {
+    background: #fff;
+}
+#newProjBtn {
+    margin: 10px 38% 0;
+    width: 20%;
+    padding: 2px;
+    font-size: 23px;
+    border-radius: 10px;
+    border: 2px solid var(--dark);
+    background: var(--lighter);
+    font-weight:bold;
 }
 
 .projBtn {
     display:block;
-    margin: 10px auto;
+    margin: 20px auto;
     width: 90%;
     padding: 5px;
+    border: 2px solid var(--dark);
+    background: var(--lighter);
+    border-radius: 10px;
 }
+#defaultProj {
+    font-weight:bold;
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+#newProjBtn:hover, .projBtn:hover, #newCard:hover {background: var(--light);}
 
 
 /* CARDS */
 
 .cardside {
-    margin-left: 25%;
+    position:absolute;
+    left: 350px;
     padding-top: 50px;
 }
 
 .card, .cardDone {
     padding: 5px;
-    width: 500px;
-    min-height: ;
+    max-width: 95%;
+    min-width: 250px;
     margin: 0 auto 20px;
-    background: var(--lighter);
-    border-radius: 0 20px 20px 0;
+    background: var(--medium);
     border-right: 15px solid;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    box-shadow: 3px 3px 1px rgba(0,0,0,0.4);
     cursor:default;
-    transition: all 1s;
+    overflow:auto;
 }
 .cardDone {
     color: rgba(0,0,0,0.3);
@@ -96,8 +123,6 @@ input[type=text] {
     font-weight:bold;
     font-size: 20px;
     font-variant: small-caps;
-    position:relative;
-    right: 30px;
 }
 #DueDate {
     float: right;
@@ -108,51 +133,42 @@ input[type=text] {
     display:none;
     margin-bottom: 10px;
 }
-.card:hover #Desc{
-    display: block;
-}
-.card:hover #delete, .card:hover #edit {
-    display:inline-block;
-}
+.card:hover #Desc{display: block;}
 
 #delete, #edit {
     display:none;
     background: rgba(255,255,255,0.5);
-    border:none;
-    border-radius: 10px;
+    border: 2px solid var(--dark);
+    border-radius: 5px;
     font-size: 18px;
     width: 35px;
     height: 35px;
     margin: 5px 10px;
     font-weight:bold;
-    transition: all 0.5s;
 }
-#delete:hover, #edit:hover {
-    background: rgba(255,255,255,0.8);
-}
+#delete:hover, #edit:hover {background: rgba(255,255,255,0.8);}
+.card:hover #delete, .card:hover #edit {display:inline-block;}
 
 #complete {
     appearance: none;
     background: rgba(255,255,255,0.5);
+    box-shadow: 3px 3px 1px rgba(0,0,0,0.4);
     width: 25px;
     height: 25px;
-    border-radius: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--dark);
     outline:none;
-    float:left;
-    position:relative;
-    right: 50px;
+    float: ;
+    position:absolute;
+    left: -40px;
 }
 #complete:checked {
     background: rgba(255,255,255,0.8);
     color: #000;
     text-align:center;
-    font-size: 18px;
+    font-size: 15px;
 }
 
-/* 
-    Look into that thing that makes dates decent looking
-    Make the drop down desc bit better
-*/
 
 /* OVERLAYS */
 
@@ -171,28 +187,69 @@ input[type=text] {
     bottom: 0;
     z-index: 1;
 }
-#overlay {
-    display:block;
-    position:fixed;
+
+
+/* FORM */
+
+#newForm {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px 20px 20px;
     width: 80vw;
-    height: 65vh;
     margin:auto;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 25px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0 0 25px 25px;
+    transition: all 1s;
 }
 
-#newForm  {
-    padding: 20px;
+#newForm input:required {
+    box-shadow:2px 2px 0px rgb(211, 7, 7);
 }
 
-#descLabel {
-    vertical-align: top;
+#newForm input[type=text], textarea{
+    width: 99%;
+    margin-bottom: 30px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 2px;
 }
+
+#newForm input[type=date]{
+    background: rgba(255,255,255,0.7);
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+#newForm input[type=date], select {
+    width: 25%;
+    margin-bottom: 40px;
+}
+
+#newForm input[type=text]:focus, textarea:focus, #newForm input[type=date]:focus {
+    border: 1px solid var(--dark);
+    background: #fff;
+}
+
+#newForm input[type=button] {
+    width: 40%;
+    padding: 5px;
+    border: 2px solid;
+    border-radius: 10px;
+    font-weight:bold;
+}
+#cancelBtn{
+    background: rgb(248, 148, 148);
+    color: #000;
+}
+#cancelBtn:hover {background: rgb(250, 32, 32);}
+#subBtn {
+    background: rgb(151, 248, 148);
+    color: #000;
+}
+#subBtn:hover {background: rgb(32, 250, 61);}
 
 
 /* MISC */
@@ -201,3 +258,6 @@ input[type=text] {
     background: green;
     color: green;
 }
+
+
+/* MOBILE */
