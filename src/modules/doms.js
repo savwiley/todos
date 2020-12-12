@@ -31,6 +31,8 @@ const titleI = document.createElement("input");
     titleI.setAttribute("type", "text");
     titleI.setAttribute("name", "title");
     titleI.setAttribute("id", "formTitle");
+    titleI.placeholder = "Title and Date are required";
+    titleI.required = true;
     form.appendChild(titleI);
 
 //description
@@ -43,6 +45,7 @@ const descI = document.createElement("textarea");
     descI.setAttribute("type", "text");
     descI.setAttribute("name", "desc");
     descI.setAttribute("id", "formDesc");
+    descI.required = false;
     form.appendChild(descI);
 
 //due date
@@ -54,6 +57,7 @@ const dueI = document.createElement("input");
     dueI.setAttribute("type", "date");
     dueI.setAttribute("name", "dueDate");
     dueI.setAttribute("id", "formDueDate");
+    dueI.required = true;
     form.appendChild(dueI);
 
 //priority dropdown menu
@@ -64,17 +68,18 @@ const priLabel = document.createElement("label");
 const priority = document.createElement("select");
     priority.setAttribute("name", "priority");
     priority.setAttribute("id", "priority");
+    priority.required = true;
     form.appendChild(priority);
 const pLow = document.createElement("option");
-    pLow.setAttribute("value", "low");
+    pLow.value = "low";
     pLow.innerHTML = "Low";
     priority.appendChild(pLow);
 const pMed = document.createElement("option");
-    pMed.setAttribute("value", "medium");
+    pMed.value = "medium";
     pMed.innerHTML = "Medium";
     priority.appendChild(pMed);
 const pHigh = document.createElement("option");
-    pHigh.setAttribute("value", "high");
+    pHigh.value = "high";
     pHigh.innerHTML = "High";
     priority.appendChild(pHigh);
 
@@ -86,12 +91,13 @@ const projLabel = document.createElement("label");
 const project = document.createElement("select");
     project.setAttribute("name", "project");
     project.setAttribute("id", "project");
+    project.required = false;
     form.appendChild(project);
 
 //cancel button
 const cancelBtn = document.createElement("input");
     cancelBtn.setAttribute("type", "button");
-    cancelBtn.setAttribute("value", "Cancel");
+    cancelBtn.value = "Cancel";
     cancelBtn.setAttribute("id", "cancelBtn");
     cancelBtn.addEventListener("click", () => {
         const overlay = document.querySelector(".overlay");
@@ -125,7 +131,7 @@ function newForm() {
     const form = document.getElementById("newForm");
     const subBtn = document.createElement("input");
         subBtn.setAttribute("type", "button");
-        subBtn.setAttribute("value", "Submit");
+        subBtn.value = "Submit";
         subBtn.setAttribute("id", "subBtn");
         subBtn.addEventListener('click', submit);
         form.appendChild(subBtn);
@@ -133,13 +139,14 @@ function newForm() {
 
 
 //submit new object/card
-//action needs its own function because it has to be removed via edit button
+//listener needs its own function because it has to be removed via edit button
 function submit(){
+    if (!titleI.value || !dueI.value) {
+        alert("Please fill in Title and Due Date fields.");
+    }
     new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
     storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
 };
-
-
 
 
 //create project input
@@ -149,30 +156,36 @@ function newProject() {
     const newProjForm = document.createElement("input");
         newProjForm.setAttribute("id", "newProjForm");
         newProjForm.setAttribute("type", "text");
-        newProjForm.setAttribute("placeholder", "Project Name");
+        newProjForm.placeholder = "Project Name";
         sidebar.appendChild(newProjForm);
 
     //creates button to add new projects
     const newProjBtn = document.createElement("input");
         newProjBtn.setAttribute("id", "newProjBtn");
         newProjBtn.setAttribute("type", "button");
-        newProjBtn.setAttribute("value", "+");
+        newProjBtn.value = "+";
 
         //creates a new project button
         newProjBtn.addEventListener("click", () => {
+            if (!newProjForm.value) {
+                newProjForm.placeholder = "MUST ENTER PROJECT NAME";
+            } else {
             const newProj = document.createElement("input");
                 newProj.setAttribute("class", "projBtn");
                 newProj.setAttribute("id", projects.length);
                 newProj.setAttribute("type", "button");
-                newProj.setAttribute("value", newProjForm.value);
+                newProj.value = newProjForm.value;
+                sidebar.appendChild(newProj);
                 projects.push(newProjForm.value);
                 storeProj();
 
                 //adds project to new/edit todo form
                 const projOpt = document.createElement("option");
-                    projOpt.setAttribute("value", (projects.length - 1));
+                    projOpt.value = (projects.length - 1);
                     projOpt.innerHTML = newProjForm.value;
                     project.appendChild(projOpt);
+                    newProjForm.value = "";
+                    newProjForm.placeholder = "Project Name";
 
                 //filters between projects
                 newProj.addEventListener("click", () => {
@@ -187,11 +200,9 @@ function newProject() {
                             }
                         })
                 }) 
-
-                sidebar.appendChild(newProj);
+            }
         });
-
-        sidebar.appendChild(newProjBtn);
+    sidebar.appendChild(newProjBtn);
 };
 
 
@@ -205,12 +216,12 @@ function getProj() {
                 newProj.setAttribute("class", "projBtn");
                 newProj.setAttribute("id", projects.length);
                 newProj.setAttribute("type", "button");
-                newProj.setAttribute("value", btn);
+                newProj.value = btn;
                 projects.push(btn);
 
                 //adds project to new/edit todo form
                 const projOpt = document.createElement("option");
-                    projOpt.setAttribute("value", (projects.length - 1));
+                    projOpt.value = (projects.length - 1);
                     projOpt.innerHTML = btn;
                     project.appendChild(projOpt);
 
@@ -252,13 +263,13 @@ function storageProj() {
 
 
 
-
+//default project btn/see all projects btn
 function defaultProj() {
     const defaultProj = document.createElement("input");
         defaultProj.setAttribute("class", "projBtn");
         defaultProj.setAttribute("id", "defaultProj");
         defaultProj.setAttribute("type", "button");
-        defaultProj.setAttribute("value", "See All");
+        defaultProj.value = "See All";
         defaultProj.addEventListener("click", () => {
             const card = document.querySelectorAll(".card");
                 card.forEach((e) => {
@@ -274,7 +285,7 @@ function newCard() {
         const newBtn = document.createElement("input");
             newBtn.setAttribute("id", "newCard");
             newBtn.setAttribute("type", "button");
-            newBtn.setAttribute("value", "New To-Do");
+            newBtn.value = "New To-Do";
             newBtn.addEventListener('click', newForm);
         sidebar.appendChild(newBtn);
 };
@@ -310,7 +321,7 @@ function edCard(card, cardID) {
 
     //submitting the edited form
     const editBtn = document.querySelector("#subBtn");
-        editBtn.setAttribute("value", "Edit");
+        editBtn.value = "Edit";
         editBtn.removeEventListener("click", submit);
         editBtn.addEventListener("click", () => {
             //changes object and div information
@@ -330,14 +341,13 @@ function edCard(card, cardID) {
             }
             todosArr[cardID - 1].project = project.value;
             card.setAttribute("data-proj", project.value);
+            storeArr();
         });
 
     //append submit/edit button to form
     const form = document.getElementById("newForm");
         form.appendChild(editBtn);
 };
-
-//I'd like to make a fade effect
 
 function doms() {
     newCard();
