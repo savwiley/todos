@@ -84,9 +84,10 @@ function toDos(title, desc, dueDate, priority, project) {
             delBtn.setAttribute("id", "delete");
             delBtn.setAttribute("type", "button");
             delBtn.setAttribute("value", "X");
+            let numb = todosArr.length - 1;
             delBtn.addEventListener('click', () => {
                 card.remove();
-                localStorage.removeItem(`item${(todosArr.length - 1)}`)
+                localStorage.removeItem(`item${numb}`)
             });
             card.appendChild(delBtn);
 
@@ -232,7 +233,7 @@ DONE
 
 
 
-    Delete projects
+    Be able to delete projects
     Add credit
 
 */
