@@ -233,8 +233,9 @@ DONE
 
 
 
-    Be able to delete projects
+    fix it so no prior picked won't show red/make prior required?
     Add credit
+    mobile friendly
 
 */
 
