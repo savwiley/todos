@@ -68,6 +68,7 @@ function newProject() {
                     delProj.setAttribute("type", "button");
                     delProj.setAttribute("class", "delProj");
                     delProj.setAttribute("id", projects.length);
+                    delProj.value = "X";
                     sidebar.appendChild(delProj);
                     let numb = projects.length - 1;
                     delProj.addEventListener("click", () => {
@@ -142,6 +143,7 @@ function getProj() {
                     delProj.setAttribute("type", "button");
                     delProj.setAttribute("class", "delProj");
                     delProj.setAttribute("id", projects.length);
+                    delProj.value = "X";
                     sidebar.appendChild(delProj);
                     let numb = projects.length - 1;
                     delProj.addEventListener("click", () => {
