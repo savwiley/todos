@@ -199,7 +199,22 @@ function newProject() {
                                 e.style.display = "block";
                             }
                         })
-                }) 
+                })
+
+                //creates delete proj btn
+                const delProj = document.createElement("input");
+                    delProj.setAttribute("type", "button");
+                    delProj.setAttribute("class", "delProj");
+                    delProj.setAttribute("id", projects.length);
+                    sidebar.appendChild(delProj);
+                    let numb = projects.length - 1;
+                    delProj.addEventListener("click", () => {
+                            newProj.remove();
+                            projOpt.remove();
+                            delProj.remove();
+                            localStorage.removeItem(`proj${numb}`);
+                        
+                    })
             }
         });
     sidebar.appendChild(newProjBtn);
@@ -240,6 +255,22 @@ function getProj() {
                 }) 
 
                 sidebar.appendChild(newProj);
+
+                //creates delete proj btn
+                const delProj = document.createElement("input");
+                    delProj.setAttribute("type", "button");
+                    delProj.setAttribute("class", "delProj");
+                    delProj.setAttribute("id", projects.length);
+                    sidebar.appendChild(delProj);
+                    let numb = projects.length - 1;
+                    delProj.addEventListener("click", () => {
+                            newProj.remove();
+                            projOpt.remove();
+                            delProj.remove();
+                            localStorage.removeItem(`proj${numb}`);
+                        
+                    })
+                
         } else {
             storeProj();
         }
