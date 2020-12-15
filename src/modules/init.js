@@ -1,4 +1,4 @@
-import {edCard} from "../modules/doms";
+import {edCard} from "../modules/forms";
 import {parseISO, format} from 'date-fns';
 
 //array for my todo objects
