@@ -90,6 +90,15 @@ input[type=text] {
     margin-top: 30px;
 }
 
+.delProj {
+    z-index: 2;
+    float: right;
+    border-radius: 50%;
+    position: relative;
+    bottom: 55px;
+    right: 10px;
+}
+
 #newProjBtn:hover, .projBtn:hover, #newCard:hover {background: var(--light);}
 
 
@@ -97,14 +106,14 @@ input[type=text] {
 
 .cardside {
     position:absolute;
-    left: 350px;
+    left: 400px;
     padding-top: 50px;
 }
 
 .card, .cardDone {
     padding: 5px;
     max-width: 95%;
-    min-width: 250px;
+    min-width: 500px;
     margin: 0 auto 20px;
     background: var(--medium);
     border-right: 15px solid;
@@ -198,7 +207,7 @@ input[type=text] {
     padding: 30px 20px 20px;
     width: 80vw;
     margin:auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 0 0 25px 25px;
     transition: all 1s;
 }
