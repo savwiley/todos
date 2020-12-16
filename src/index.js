@@ -9,6 +9,7 @@ import {storageProj} from "./modules/projects";
 const run = (() => {
     runDoms();
     toDos;
+    //localStorage.clear();
     storage();
     newCard();
     projectsRun();
