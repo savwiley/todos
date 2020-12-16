@@ -24,6 +24,17 @@ input[type=text] {
     outline:none;
 }
 
+.fa-github-square {
+    font-size: 30px;
+    float: right;
+    margin: 5px 10px 0 0;
+    color: var(--medium);
+    transition: color 0.5s;
+}
+.fa-github-square:hover {
+    color: var(--dark);
+}
+
 
 /* SIDEBAR */
 
@@ -274,3 +285,69 @@ input[type=text] {
 
 
 /* MOBILE */
+
+@media (max-width: 1000px) {
+
+    /* CREDIT */
+    .fa-github-square {
+        margin: 10px 10px 0 0;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        position:inherit;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height: auto;
+        max-height: 100px;
+        width: 100%;
+        padding: 5px;
+        box-shadow: 0 4px 4px rgba(0,0,0,0.4);
+    }
+    .projBtn {
+        display:block;
+    }
+    #newCard, #newProjForm, #newProjBtn, #defaultProj {
+        display:inline;
+        position: inherit;
+    }
+    #newCard {
+        width: 100px;
+        font-size: 15px;
+        padding: 2px;
+        margin-right: 10%;
+    }
+    #newProjForm {
+        margin: 0 10px 0 0;
+        width: 20%;
+    }
+    #newProjBtn {
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+    }
+    #defaultProj {
+        width: 100px;
+        margin: 0 10px 0 10%;
+    }
+    .delProj {
+        margin: 0;
+        bottom: -20px;
+        right: 30px;
+    }
+
+    /* CARDS */
+    .cardside {
+        left: 100px;
+        top: 100px;
+        padding-top: 50px;
+        width: 90%;
+    }
+    .card, .cardDone {
+        width: 80%;
+        float: left;
+    }
+    #Desc{display: block;}
+    #delete, #edit {display:inline-block;}
+}
