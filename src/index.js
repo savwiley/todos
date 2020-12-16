@@ -9,9 +9,22 @@ import {storageProj} from "./modules/projects";
 const run = (() => {
     runDoms();
     toDos;
-    //localStorage.clear();
     storage();
     newCard();
     projectsRun();
     storageProj();
 })();
+
+
+
+try {
+    run;
+} catch (e) {
+    if (e instanceof RangeError) {
+        localStorage.clear();
+        location.reload();
+    } else {
+        throw e;
+    }
+};
+
