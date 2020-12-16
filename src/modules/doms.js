@@ -99,6 +99,34 @@ function doms() {
     overBox.appendChild(form);
     overlay.appendChild(overBox);
     body.appendChild(overlay);
+};
+
+
+
+function credit() {
+
+    //retrieves page
+    const body = document.querySelector("#content");
+
+    //link
+    const credLink = document.createElement("a");
+        credLink.setAttribute("href", "https://github.com/savwiley/todos");
+        body.appendChild(credLink);
+
+    //fontawesome
+    const cred = document.createElement("i");
+        cred.setAttribute("class", "fab fa-github-square");
+        cred.setAttribute("title", "View on GitHub");
+        credLink.appendChild(cred);
+
 }
 
-export default doms;
+//<i class="fab fa-github-square"></i>
+
+
+function runDoms() {
+    doms();
+    credit();
+};
+
+export default runDoms;
