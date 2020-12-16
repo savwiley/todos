@@ -102,8 +102,10 @@ function edCard(card, cardID) {
                 card.style.borderColor = "green";
             } else if (priority.value == "medium") {
                 card.style.borderColor = "yellow";
-            } else {
+            } else if (priority == "hard") {
                 card.style.borderColor = "red";
+            } else {
+                card.style.borderColor = "white";
             }
             todosArr[cardID - 1].project = project.value;
             card.setAttribute("data-proj", project.value);

@@ -75,8 +75,10 @@ function toDos(title, desc, dueDate, priority, project) {
                 card.style.borderColor = "green";
             } else if (priority == "medium") {
                 card.style.borderColor = "yellow";
-            } else {
+            } else if (priority == "hard") {
                 card.style.borderColor = "red";
+            } else {
+                card.style.borderColor = "white";
             }
             card.appendChild(cPrior);
 
@@ -232,10 +234,8 @@ DONE
 DONE
 
 
-
-    fix it so no prior picked won't show red/make prior required?
-    Add credit
-    mobile friendly
+    add license
+    fix readme
 
 */
 
