@@ -1,5 +1,5 @@
 import {toDos, storage} from "./modules/init";
-import doms from "./modules/doms";
+import runDoms from "./modules/doms";
 import {newCard} from "./modules/forms";
 import projectsRun from "./modules/projects";
 import {storageProj} from "./modules/projects";
@@ -7,7 +7,7 @@ import {storageProj} from "./modules/projects";
 
 
 const run = (() => {
-    doms();
+    runDoms();
     toDos;
     storage();
     //localStorage.clear();
