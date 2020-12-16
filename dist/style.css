@@ -31,9 +31,7 @@ input[type=text] {
     color: var(--medium);
     transition: color 0.5s;
 }
-.fa-github-square:hover {
-    color: var(--dark);
-}
+.fa-github-square:hover {color: var(--dark);}
 
 
 /* SIDEBAR */
@@ -72,9 +70,7 @@ input[type=text] {
     border-radius: 3px;
     padding: 5px;
 }
-#newProjForm:focus {
-    background: #fff;
-}
+#newProjForm:focus {background: #fff;}
 #newProjBtn {
     margin: 10px 38% 0;
     width: 20%;
@@ -233,9 +229,7 @@ input[type=text] {
     border-radius: 0 0 25px 25px;
 }
 
-#newForm input:required {
-    box-shadow:2px 2px 0px rgb(211, 7, 7);
-}
+#newForm input:required {box-shadow:2px 2px 0px rgb(211, 7, 7);}
 
 #newForm input[type=text], textarea{
     width: 99%;
@@ -289,9 +283,7 @@ input[type=text] {
 @media (max-width: 1000px) {
 
     /* CREDIT */
-    .fa-github-square {
-        margin: 10px 10px 0 0;
-    }
+    .fa-github-square {margin: 10px 10px 0 0;}
 
     /* SIDEBAR */
     .sidebar {
@@ -305,9 +297,7 @@ input[type=text] {
         padding: 5px;
         box-shadow: 0 4px 4px rgba(0,0,0,0.4);
     }
-    .projBtn {
-        display:block;
-    }
+    .projBtn {display:block;}
     #newCard, #newProjForm, #newProjBtn, #defaultProj {
         display:inline;
         position: inherit;
