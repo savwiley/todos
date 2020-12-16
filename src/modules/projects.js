@@ -154,8 +154,6 @@ function getProj() {
                         
                     })
                 
-        } else {
-            storeProj();
         }
     }
 };

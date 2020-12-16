@@ -108,6 +108,8 @@ function toDos(title, desc, dueDate, priority, project) {
 
 
 
+
+
 //localStorage
 function getArr() {
     for (let i = 0; i < localStorage.length; i++) {
@@ -115,8 +117,6 @@ function getArr() {
             const array = localStorage.getItem(`item${i}`);
             const obj = JSON.parse(array);
             new toDos(obj.title, obj.desc, obj.dueDate, obj.priority, obj.project);
-        } else {
-            storeArr();
         }
     }
 };

@@ -37,9 +37,10 @@ function submit(){
     const project = document.getElementById("project");
     if (!titleI.value || !dueI.value) {
         alert("Please fill in Title and Due Date fields.");
+    } else {
+        new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
+        storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
     }
-    new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
-    storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
 };
 
 
