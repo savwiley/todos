@@ -119,9 +119,7 @@ function credit() {
         cred.setAttribute("title", "View on GitHub");
         credLink.appendChild(cred);
 
-}
-
-//<i class="fab fa-github-square"></i>
+};
 
 
 function runDoms() {
