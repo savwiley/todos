@@ -35,6 +35,7 @@ function submit(){
     const dueI = document.getElementById("formDueDate");
     const priority = document.getElementById("priority");
     const project = document.getElementById("project");
+    //checks for title and date
     if (!titleI.value || !dueI.value) {
         alert("Please fill in Title and Due Date fields.");
     } else {
@@ -91,26 +92,32 @@ function edCard(card, cardID) {
         editBtn.value = "Edit";
         editBtn.removeEventListener("click", submit);
         editBtn.addEventListener("click", () => {
-            //changes object and div information
-            todosArr[cardID -1].title = titleI.value;
-            cTitle.textContent = titleI.value;
-            todosArr[cardID -1].desc = descI.value;
-            cDesc.textContent = descI.value;
-            todosArr[cardID -1].dueDate = dueI.value;
-            cDate.textContent = `Due on ${dueI.value}`;
-            todosArr[cardID -1].priority = priority.value;
-            if (priority.value == "low") {
-                card.style.borderColor = "green";
-            } else if (priority.value == "medium") {
-                card.style.borderColor = "yellow";
-            } else if (priority == "hard") {
-                card.style.borderColor = "red";
+
+            //checks for title and date
+            if (!titleI.value || !dueI.value) {
+                alert("Please fill in Title and Due Date fields.");
             } else {
-                card.style.borderColor = "white";
+                //changes object and div information
+                todosArr[cardID -1].title = titleI.value;
+                cTitle.textContent = titleI.value;
+                todosArr[cardID -1].desc = descI.value;
+                cDesc.textContent = descI.value;
+                todosArr[cardID -1].dueDate = dueI.value;
+                cDate.textContent = `Due on ${dueI.value}`;
+                todosArr[cardID -1].priority = priority.value;
+                if (priority.value == "low") {
+                    card.style.borderColor = "green";
+                } else if (priority.value == "medium") {
+                    card.style.borderColor = "yellow";
+                } else if (priority == "hard") {
+                    card.style.borderColor = "red";
+                } else {
+                    card.style.borderColor = "white";
+                }
+                todosArr[cardID - 1].project = project.value;
+                card.setAttribute("data-proj", project.value);
+                storeArr();
             }
-            todosArr[cardID - 1].project = project.value;
-            card.setAttribute("data-proj", project.value);
-            storeArr();
         });
 
     //append submit/edit button to form
