@@ -122,9 +122,31 @@ function credit() {
 };
 
 
+function clearHistory() {
+
+    //retrieves page
+    const body = document.querySelector("#content");
+
+    //create btn
+    const clearBtn = document.createElement("input");
+        clearBtn.setAttribute("type", "button");
+        clearBtn.setAttribute("id", "clearBtn");
+        clearBtn.value = "Clear History";
+        clearBtn.addEventListener('click', () => {
+            if (confirm("Are you sure? Choosing OK will delete all of your to-do items and projects.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        })
+        body.appendChild(clearBtn);
+
+}
+
+
 function runDoms() {
     doms();
     credit();
+    clearHistory();
 };
 
 export default runDoms;
