@@ -49,26 +49,22 @@ function toDos(title, desc, dueDate, priority, project, completeCheck) {
         //the checkbox
         const complete = document.createElement("input");
             complete.setAttribute("id", "complete");
+            complete.setAttribute("class", `complete${todosArr.length}`);
             complete.setAttribute("type", "checkbox");
+            if (completeCheck) {
+                card.removeAttribute("class");
+                card.setAttribute("class", "cardDone");
+                complete.innerHTML = '<i class="fas fa-check"></i>';
+            } else {
+                card.removeAttribute("class");
+                card.setAttribute("class", "card");
+                complete.innerHTML = '';
+            };
             complete.addEventListener('change', () => {
-                if (complete.checked || completeCheck) {
-                    card.removeAttribute("class");
-                    card.setAttribute("class", "cardDone");
-                    complete.innerHTML = '<i class="fas fa-check"></i>';
-                    completeCheck = true;
-                    storeArr();
-                } else {
-                    card.removeAttribute("class");
-                    card.setAttribute("class", "card");
-                    complete.innerHTML = '';
-                    completeCheck = false;
-                    storeArr();
-                };
+                const checkClass = complete.getAttribute("class");
+                checkmark(checkClass);
             });
             card.appendChild(complete);
-
-            //trying to save checked items to localStorage
-            //look at forms.js in submit()
 
         const cDesc = document.createElement("div");
             cDesc.setAttribute("id", "Desc");
@@ -115,6 +111,29 @@ function toDos(title, desc, dueDate, priority, project, completeCheck) {
 };
 
 
+
+//checkbox change
+function checkmark(checkClass) {
+    for (let i = 1; i <= todosArr.length; i++){
+        const complete = document.querySelector(`.${checkClass}`);
+        const card = document.getElementById(`${i}`);
+        if (checkClass == `complete${i}`) {
+            if (complete.checked) {
+                card.removeAttribute("class");
+                card.setAttribute("class", "cardDone");
+                complete.innerHTML = '<i class="fas fa-check"></i>';
+                todosArr[i - 1].completeCheck = true;
+                storeArr();
+            } else {
+                card.removeAttribute("class");
+                card.setAttribute("class", "card");
+                complete.innerHTML = '';
+                todosArr[i - 1].completeCheck = false;
+                storeArr();
+            };
+        }
+    }
+}
 
 
 
