@@ -14,17 +14,3 @@ const run = (() => {
     projectsRun();
     storageProj();
 })();
-
-
-
-try {
-    run;
-} catch (e) {
-    if (e instanceof RangeError) {
-        localStorage.clear();
-        location.reload();
-    } else {
-        throw e;
-    }
-};
-
