@@ -39,8 +39,10 @@ function submit(){
     if (!titleI.value || !dueI.value) {
         alert("Please fill in Title and Due Date fields.");
     } else {
-        new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value);
-        storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value);
+        new toDos(titleI.value, descI.value, dueI.value, priority.value, project.value, true);
+        storeArr(titleI.value, descI.value, dueI.value, priority.value, project.value, true);
+        const overlay = document.querySelector(".overlay");
+            overlay.style.display = "none";
     }
 };
 
@@ -117,6 +119,8 @@ function edCard(card, cardID) {
                 todosArr[cardID - 1].project = project.value;
                 card.setAttribute("data-proj", project.value);
                 storeArr();
+                const overlay = document.querySelector(".overlay");
+                    overlay.style.display = "none";
             }
         });
 
