@@ -13,15 +13,16 @@ const cardSide = document.createElement("div");
 
 
 //To-Do List Object
-function toDos(title, desc, dueDate, priority, project) {
+function toDos(title, desc, dueDate, priority, project, completeCheck) {
 
     this.title = title,
     this.desc = desc,
     this.dueDate = dueDate,
-    this.priorty = priority;
+    this.priorty = priority,
+    this.completeCheck = completeCheck;
 
     //pushes objects into array
-    todosArr.push({title, desc, dueDate, priority, project});
+    todosArr.push({title, desc, dueDate, priority, project, completeCheck});
 
     //creates new date format with date-fns
     const newDate = format(new Date(parseISO(`${dueDate}T00:00:00`)), 'P');
@@ -50,17 +51,24 @@ function toDos(title, desc, dueDate, priority, project) {
             complete.setAttribute("id", "complete");
             complete.setAttribute("type", "checkbox");
             complete.addEventListener('change', () => {
-                if (complete.checked) {
+                if (complete.checked || completeCheck) {
                     card.removeAttribute("class");
                     card.setAttribute("class", "cardDone");
                     complete.innerHTML = '<i class="fas fa-check"></i>';
+                    completeCheck = true;
+                    storeArr();
                 } else {
                     card.removeAttribute("class");
                     card.setAttribute("class", "card");
                     complete.innerHTML = '';
+                    completeCheck = false;
+                    storeArr();
                 };
             });
             card.appendChild(complete);
+
+            //trying to save checked items to localStorage
+            //look at forms.js in submit()
 
         const cDesc = document.createElement("div");
             cDesc.setAttribute("id", "Desc");
@@ -116,7 +124,7 @@ function getArr() {
         if (localStorage.getItem(`item${i}`)){
             const array = localStorage.getItem(`item${i}`);
             const obj = JSON.parse(array);
-            new toDos(obj.title, obj.desc, obj.dueDate, obj.priority, obj.project);
+            new toDos(obj.title, obj.desc, obj.dueDate, obj.priority, obj.project, obj.completeCheck);
         }
     }
 };
