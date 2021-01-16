@@ -81,7 +81,7 @@ function newProject() {
             }
         });
     sidebar.appendChild(newProjBtn);
-};
+}
 
 
 
@@ -99,15 +99,16 @@ function defaultProj() {
                 });
         });
         sidebar.appendChild(defaultProj);
-};
+}
 
 
 
 //localStorage
 function getProj() {
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.getItem(`proj${i}`)) {
-            const btn = localStorage.getItem(`proj${i}`);
+    const keys = Object.keys(localStorage);
+    for (let i = 0; i < keys.length; i++) {
+        if (keys[i].includes("proj-")) {
+            const btn = localStorage.getItem(keys[i]);
             const newProj = document.createElement("input");
                 newProj.setAttribute("class", "projBtn");
                 newProj.setAttribute("id", projects.length);
@@ -118,7 +119,7 @@ function getProj() {
                 //adds project to new/edit todo form
                 const project = document.querySelector("#project");
                 const projOpt = document.createElement("option");
-                    projOpt.value = (projects.length - 1);
+                    projOpt.value = btn;
                     projOpt.innerHTML = btn;
                     project.appendChild(projOpt);
 
@@ -127,8 +128,7 @@ function getProj() {
                     const card = document.querySelectorAll(".card");
                         card.forEach((e) => {
                             const cardProj = e.getAttribute("data-proj");
-                            const projNumb = newProj.getAttribute("id");
-                            if (cardProj !== projNumb) {
+                            if (cardProj !== btn) {
                                 e.style.display = "none";
                             } else {
                                 e.style.display = "block";
@@ -145,24 +145,23 @@ function getProj() {
                     delProj.setAttribute("id", projects.length);
                     delProj.value = "X";
                     sidebar.appendChild(delProj);
-                    let numb = projects.length - 1;
                     delProj.addEventListener("click", () => {
                             newProj.remove();
                             projOpt.remove();
                             delProj.remove();
-                            localStorage.removeItem(`proj${numb}`);
+                            localStorage.removeItem(keys[i]);
                         
                     })
                 
         }
     }
-};
+}
 
 function storeProj() {
     for (let i = 0; i < projects.length; i++) {
-        localStorage.setItem(`proj${i}`, projects[i]);
+        localStorage.setItem(`proj-${projects[i]}`, projects[i]);
     }
-};
+}
 
 function storageProj() {
     if (localStorage){
@@ -170,14 +169,14 @@ function storageProj() {
     } else {
         storeProj();
     }
-};
+}
 
 
 
 function projectsRun() {
     newProject();
     defaultProj();
-};
+}
 
 export default projectsRun;
 export {storageProj};

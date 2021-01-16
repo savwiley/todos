@@ -15,7 +15,7 @@ function newForm() {
     if (document.getElementById("subBtn")) {
         const oldSubBtn = document.getElementById("subBtn");
         oldSubBtn.remove();
-    };
+    }
     //submit button
     const form = document.getElementById("newForm");
     const subBtn = document.createElement("input");
@@ -24,7 +24,7 @@ function newForm() {
         subBtn.setAttribute("id", "subBtn");
         subBtn.addEventListener('click', submit);
         form.appendChild(subBtn);
-};
+}
 
 
 //submit new object/card
@@ -44,7 +44,7 @@ function submit(){
         const overlay = document.querySelector(".overlay");
             overlay.style.display = "none";
     }
-};
+}
 
 
 
@@ -58,7 +58,7 @@ function newCard() {
         //retrieves sidebar
         const sidebar = document.querySelector(".sidebar");
         sidebar.appendChild(newBtn);
-};
+}
 
 
 //edit button action overlay
@@ -87,7 +87,7 @@ function edCard(card, cardID) {
     if (document.getElementById("edBtn")) {
         const oldEditBtn = document.getElementById("edBtn");
         oldEditBtn.remove();
-    };
+    }
 
     //submitting the edited form
     const editBtn = document.querySelector("#subBtn");
@@ -111,7 +111,7 @@ function edCard(card, cardID) {
                     card.style.borderColor = "green";
                 } else if (priority.value == "medium") {
                     card.style.borderColor = "yellow";
-                } else if (priority == "hard") {
+                } else if (priority == "high") {
                     card.style.borderColor = "red";
                 } else {
                     card.style.borderColor = "white";
@@ -127,7 +127,7 @@ function edCard(card, cardID) {
     //append submit/edit button to form
     const form = document.getElementById("newForm");
         form.appendChild(editBtn);
-};
+}
 
 
 
