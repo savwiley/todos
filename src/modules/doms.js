@@ -99,7 +99,7 @@ function doms() {
     overBox.appendChild(form);
     overlay.appendChild(overBox);
     body.appendChild(overlay);
-};
+}
 
 
 
@@ -119,7 +119,7 @@ function credit() {
         cred.setAttribute("title", "View on GitHub");
         credLink.appendChild(cred);
 
-};
+}
 
 
 function clearHistory() {
@@ -147,6 +147,6 @@ function runDoms() {
     doms();
     credit();
     clearHistory();
-};
+}
 
 export default runDoms;
